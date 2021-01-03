@@ -1,6 +1,6 @@
 package part2OOP
 
-object InheritanceExample extends App {
+object InheritanceExample1 extends App {
 
   abstract class MyList {
     def head: Int
