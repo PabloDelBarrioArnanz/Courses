@@ -9,6 +9,7 @@ object AbstractDataTypes extends App {
   }
 
   //val animal = new Animal No se puede porque es Abstracta
+
   //Te obliga a sobreescribir los metodos de la clase abstracta
   //En este caso el override es opcional no como si fuera herencia normal
   class Dog extends Animal {
@@ -20,8 +21,6 @@ object AbstractDataTypes extends App {
   //Traits no pueden tener parametros de constructor
   //pueden tener partes implementadas y partes abstractas
   //Se puede extender una clase pero muchos traits
-  //trait definen comportamiento y abstract cualidades
-  //Un trait no puede usar (with) otro trait
   //Un trait no tiene porque implementar los metodos abtractos de las clases que hereda
   trait Carnivore extends Animal {
     val preferredMeal: String = "Meat"
@@ -42,6 +41,10 @@ object AbstractDataTypes extends App {
   val crocodile = new Crocodile
   crocodile.eat(dog)
 
+  //Diferencias entre Trait y Abstract class
+  //Trait no puede tener parametro
+  //Trai se pueden mezclar muchos con with
+  //trait definen comportamiento y abstract cualidades
 
   //Scala.Any madre de todos los tipos
       //Scala.AnyVal -> Int, Boolean, Float
