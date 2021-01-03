@@ -6,6 +6,8 @@ object InheritanceExample2 extends App {
     def head: A
     def tail: MyList[A]
     def isEmpty: Boolean
+    //Como nuestra lista es +A admite por ejemplo perros y gatos
+    //pero se contamina y pasa a ser de un supertipo por ejemplo animal
     def add[B >: A](element: B): MyList[B]
     def printList: String
     override def toString: String = "[" + printList + "]"
