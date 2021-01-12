@@ -15,7 +15,8 @@ object Generics extends App {
   val listOfString = new MyList[String]
   val emptyListOfInteger = MyList.emptyList[Int]
 
-  class Animal
+  class Creature
+  class Animal extends Creature
   class Cat extends Animal
   class Dog extends Animal
 
@@ -26,14 +27,13 @@ object Generics extends App {
    */
 
   class CovariantList[+A]
-  val animal: Animal = new Cat
-  val animalList: CovariantList[Animal] = new CovariantList[Animal]
+  val animalList: CovariantList[Animal] = new CovariantList[Dog]
 
   class InvariantList[A]
   val invariantAnimalList: InvariantList[Animal] = new InvariantList[Animal]
 
   class ContravariantList[-A]
-  val contravariantList: ContravariantList[Cat] = new ContravariantList[Animal]
+  val contravariantList: ContravariantList[Animal] = new ContravariantList[Creature]
 
   //Bounded types
   //La clase caja1 permite animal y subtipos de animal

@@ -8,6 +8,7 @@ object InheritanceExample2 extends App {
     def isEmpty: Boolean
     //Como nuestra lista es +A admite por ejemplo perros y gatos
     //pero se contamina y pasa a ser de un supertipo por ejemplo animal
+    //Aunque si se puede anadir un elemento que herede de perro porque en realidad es un perro
     def add[B >: A](element: B): MyList[B]
     def printList: String
     override def toString: String = "[" + printList + "]"
@@ -43,4 +44,12 @@ object InheritanceExample2 extends App {
   val newList: MyList[Any] = listOfIntegers.add("String") //Lista contaminada
   println(newList)
 
+  class Animal
+  class Dog extends Animal
+  class MiniDog extends Dog
+  class Cat extends Animal
+
+  val list2: Cons[Dog] = new Cons(new Dog, Empty)
+  val list3: MyList[Dog] = list2.add(new MiniDog)
+  val list4: MyList[Animal] = list2.add(new Animal)
 }
