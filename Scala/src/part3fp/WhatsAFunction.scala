@@ -28,8 +28,10 @@ object WhatsAFunction extends App {
     }
   }
   val superFunction2: Int => Int => Int = v1 => v2 => v1 + v2
+  val superFunction2Bis = (x: Int) => (y: Int) => x + y
 
   println(superFunction2(3)(4))
+  println(superFunction2Bis(3)(4))
 }
 
 trait MyFunction[A, B] {
