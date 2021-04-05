@@ -1,5 +1,7 @@
 package part3fp
 
+import scala.annotation.tailrec
+
 object TuplesAndMaps extends App {
 
   //TUPLES
@@ -48,6 +50,7 @@ object TuplesAndMaps extends App {
     network.view.mapValues(_.filterNot(_.equals(person))).toMap.removed(person)
 
   def removeRecursive(network: Map[String, Set[String]], person: String): Map[String, Set[String]] = {
+    @tailrec
     def removeAux(friends: Set[String], networkAcc: Map[String, Set[String]]): Map[String, Set[String]] = {
       if(friends.isEmpty) networkAcc
       else removeAux(friends.tail, unfriend(networkAcc, person, friends.head))
