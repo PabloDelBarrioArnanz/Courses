@@ -40,7 +40,7 @@ object HandlingFailure extends App {
   def renderHTML(page: String): Unit = println(page)
 
   class Connection {
-    def get: String = {
+    def get(): String = {
       if (new Random(System.nanoTime).nextBoolean) "<html>"
       else throw new RuntimeException("Connection interrupted")
     }
