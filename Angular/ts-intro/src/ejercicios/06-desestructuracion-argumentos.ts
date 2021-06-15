@@ -1,6 +1,6 @@
 
 
-interface Producto {
+export interface Producto {
     desc: string,
     precio: number
 }
@@ -15,7 +15,7 @@ const tablet: Producto = {
     precio: 1200
 }
 
-function calculaImpuestoSobreVenta(productos: Producto[]): [number, number] {
+export function calculaImpuestoSobreVenta(productos: Producto[]): [number, number] {
     let total = 0;
 
     //productos.map(producto => producto.precio) Java way
