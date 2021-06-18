@@ -1,2 +1,24 @@
 
-<h1>Heroe component</h1>
+<h1> {{ nombre }} </h1>
+
+<dl>
+    <td>Nombre</td>
+    <dd> {{ nombre }} </dd>
+
+    <td>Edad</td>
+    <dd> {{ edad }} </dd>
+
+    <td>Funcion</td>
+    <dd>{{ obtenerNombre() }}</dd>
+
+    <td>Nombre Mayus</td>
+    <dd>{{ nombreMayus }}</dd>
+
+    <button (click)="cambiarNombre()"> <!-- Cambiara todas las apariciones del nombre -->
+        Cambiar Herore
+    </button>
+    
+    <button (click)="cambiarEdad()"> <!-- si no necesita cambios no se refresca la vista -->
+        Cambiar edad
+    </button>
+</dl>
