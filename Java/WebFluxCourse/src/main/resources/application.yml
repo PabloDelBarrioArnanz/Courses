@@ -1,0 +1,5 @@
+
+
+logging:
+  pattern:
+    console: '%d{"yyyy/MM/dd HH:mm:ss,SSS"} %highlight([%p]) %green([%t]) %yellow(%M\(%F:%L\)) - %msg%n'
