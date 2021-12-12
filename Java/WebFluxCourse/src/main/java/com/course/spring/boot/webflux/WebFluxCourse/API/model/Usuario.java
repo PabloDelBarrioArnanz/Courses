@@ -1,4 +1,4 @@
-package com.course.spring.boot.webflux.WebFluxCourse.model;
+package com.course.spring.boot.webflux.WebFluxCourse.API.model;
 
 public class Usuario {
 
