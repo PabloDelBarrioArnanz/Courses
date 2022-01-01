@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.WebExchangeBindException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -54,6 +55,29 @@ public class ProductController2 {
     public Mono<ResponseEntity<Product>> save(@RequestBody Product product) {
         return productService.save(product)
                 .map(prod -> ResponseEntity.created(URI.create("/api/v2/products/detail?id=".concat(prod.getId())))
-                        .body(prod));
+                        .body(prod))
+                .onErrorResume(throwable -> Mono.just(throwable)
+                        .cast(WebExchangeBindException.class)
+                        .map(error -> ResponseEntity.badRequest().build()));
+    }
+
+    @PutMapping("/edit")
+    public Mono<ResponseEntity<Product>> edit(@RequestParam String id, @RequestBody Product product) {
+        return productService.findById(id)
+                .map(prod -> {
+                    prod.setName(product.getName());
+                    prod.setPrice(product.getPrice());
+                    return prod;
+                })
+                .flatMap(productService::save)
+                .map(prod -> ResponseEntity.created(URI.create("/api/v2/products/detail?id=".concat(prod.getId())))
+                        .body(prod))
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping
+    public Mono<ResponseEntity<Void>> delete(@RequestParam String id) {
+        return productService.deleteById(id)
+                .map(none -> ResponseEntity.noContent().build());
     }
 }
