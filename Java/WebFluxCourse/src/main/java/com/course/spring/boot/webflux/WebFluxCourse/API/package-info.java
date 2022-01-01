@@ -6,6 +6,9 @@ package com.course.spring.boot.webflux.WebFluxCourse.API;
  filter(Predicate) -> ejecuta el predicado para todos los elementos ordenadamente
  zipWith(Mono/Flux, Function) -> Combina dos flujos, si combinas un flujo con un flujo de tiempo, los elementos de primero se ejecutan en ese intervalo lo mismo que usar delayElements
  delayElements(Duration) -> Añade retardo entre los nodos del flujo
+ then(Mono) -> ejecuata otro mono a continuacion
+ thenMany(Publisher) -> ejecuata otro Flux a continuacion
+ defaultIfEmpty -> orElseGet de java
  retry(int) -> rejecuta tantas veces como le pidamos si aparece un error en el flujo
  limitRate(int) -> tamanio del batch para backpressure
  log() -> muestra traza de debug
