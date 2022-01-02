@@ -30,9 +30,9 @@ public class ProductHandler {
   public Mono<ServerResponse> detail(ServerRequest request) {
     return Mono.just(request.queryParam("id")
             .orElse("NONE"))
-        .map(productService::findById)
+        .flatMap(productService::findById)
         .flatMap(product -> ServerResponse.ok()
-            .body(product, Product.class))
+            .bodyValue(product))
         .switchIfEmpty(ServerResponse.notFound().build());
   }
 
@@ -42,6 +42,7 @@ public class ProductHandler {
         .flatMap(product -> ServerResponse.created(URI.create(API.concat("/detail?id=").concat(product.getId())))
             //Con body da error porque no es un Mono<Product> si no el product
             //bodyValue automaticamente hace Mono.just(product)
+            //Tambien funcionario body si usamos map arriba porque seria Mono de Mono de product Mono<Mono<Product>>
             .bodyValue(product));
   }
 }
