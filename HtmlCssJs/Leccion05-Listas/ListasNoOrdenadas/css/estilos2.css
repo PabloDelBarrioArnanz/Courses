@@ -1,0 +1,33 @@
+
+h1 {
+    color: #1d3557
+}
+
+ul {
+    list-style-type: none;
+    background-color: #457b9d;
+    overflow: hidden; /* Para separarlo del otro contenido */
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    float: left; /* Hace que la lista sea horizontal */
+}
+
+/* Enlaces que esten dentro de elementos de lista */
+li a {
+    display: block; /*Para que se muestren seguidos*/
+    color: white;
+    text-align: center;
+    padding: 15px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #1d3557;
+}
+
+li:last-child { /* Selecciona el ultimo elemento de tipo li */
+    float: right; /* Lo alinea a la derecha */
+}

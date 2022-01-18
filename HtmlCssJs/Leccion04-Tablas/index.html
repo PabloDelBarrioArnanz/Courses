@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="css/estilos.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Usar una fuente externa, en este caso de google -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Trocchi&display=swap" rel="stylesheet">
+
+    <title>Tablas en HTML</title>
+</head>
+<body>
+    
+    <table> <!-- Esta etiqueta no tiene representación gráfica -->
+        <caption>Listado de Personas</caption> <!-- Título de la tabla -->
+        <tr> <!-- Filas -->
+            <th>Nombre</th> <!-- Cabeceras de la tabla -->
+            <th>Apellido</th>
+            <th>Mail</th>
+        </tr>
+        <tr> <!-- siguiente fila -->
+            <td>Juan</td> <!-- relleno de casillas que no son cabeceras -->
+            <td>Perez</td>
+            <td>juan.perez@gmail.com</td>
+        </tr>
+        <tr>
+            <td>Maria</td>
+            <td>Lara</td>
+            <td>maria.lara@gmail.com</td>
+        </tr>
+    </table>
+
+    <table>
+        <caption>Listado de Personas juntando celdas</caption>
+        <tr>
+            <th colspan="2">Nombre y Apellido</th> <!-- Indicamos que esta cabecera será para 2 columnas -->
+            <th>Mail</th>
+        </tr>
+        <tr>
+            <td>Juan</td>
+            <td>Perez</td>
+            <td rowspan="2">juan.y.lara@gmail.com</td> <!-- Indicamos que este valor será para dos filas -->
+        </tr>
+        <tr>
+            <td>Maria</td>
+            <td>Lara</td>
+        </tr>
+    </table>
+
+    <table> <!-- Esta etiqueta no tiene representación gráfica -->
+        <caption>Listado de Personas</caption> <!-- Título de la tabla -->
+        <tr> <!-- Filas -->
+            <th>Nombre</th> <!-- Cabeceras de la tabla -->
+            <th>Apellido</th>
+            <th>Mail</th>
+        </tr>
+        <tr> <!-- siguiente fila -->
+            <td>Juan</td> <!-- relleno de casillas que no son cabeceras -->
+            <td>Perez</td>
+            <td>juan.perez@gmail.com</td>
+        </tr>
+        <tr>
+            <td>Maria</td>
+            <td>Lara</td>
+            <td>maria.lara@gmail.com</td>
+        </tr>
+        <tr>
+            <td>Carlos</td>
+            <td>Juarez</td>
+            <td>carlos.juarez@gmail.com</td>
+        </tr>
+        <tr>
+            <td>Karla</td>
+            <td>Esparza</td>
+            <td>karla.esparza@gmail.com</td>
+        </tr>
+    </table>
+
+</body>
+</html>
