@@ -1,0 +1,16 @@
+/*Estilo definido para todos los h1*/
+h1 {
+    color: blue;
+    background-color: black;
+}
+
+/*Estilo definido para todos los párrafos*/
+p {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Los estilos tiene herencia, este estilo se aplicará a todos los elementos dentro del body 
+a no ser que lo sobreescriban especificamente */
+body {
+    background-color: gray;
+}

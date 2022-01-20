@@ -1,0 +1,21 @@
+
+ol {
+    /*list-style-type: upper-latin; /* Por defecto usa números así usa letras A, B, C*/
+    list-style: none;
+    counter-reset: contador; /* crear el contador */
+}
+
+/* Para todo elemento de la lista se incrementa el contador*/
+ol li {
+    counter-increment: contador;
+}
+
+/* Para todo li dentro de un ol antes de su contenido se añade la palabra curso y el valor del contador*/
+ol li::before {
+    content: "Curso " counter(contador) ") ";
+    color: #ff6f00;
+}
+
+ol li::after {
+    content: ".";
+}

@@ -1,0 +1,39 @@
+
+table {
+    width: 90%; /* Usar todo el ancho */
+    margin: auto;
+    margin-bottom: 30px;
+    align-self: center;
+}
+
+caption {
+    color: #e63946;
+    font-family: 'Trocchi', serif;
+    font-size: 45px;
+    line-height: 70px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse; /* Juntar los dobles bordes en 1 */
+    /*border-spacing: 5px; espacio entre el doble borde */
+    padding: 5px;
+}
+
+th {
+    color: beige;
+    background-color: #1d3557;
+}
+
+/* Renglones pares */
+tr:nth-child(even) {
+    background-color: #f1faee;
+}
+
+tr:nth-child(odd) {
+    background-color: #a8dadc;
+}
+
+td {
+    padding-left: 10px;
+}

@@ -1,0 +1,28 @@
+
+h1 {
+    color: #f07167;
+}
+
+a:link { /*Color para los enlaces no visitados*/
+    color: #fb8500;
+    text-decoration: none; /* Quita el subrayado */
+}
+
+a:visited { /*Color para los enlaces no visitados*/
+    color: #219ebc;
+}
+
+a:hover { /*Color para cuando tenemos el curso encima del enlace*/
+    color: #8ecae6;
+    text-decoration: underline;
+}
+
+a:active { /*Color para cuando tenemos el curso pulsado en el enlace*/
+    color: #023047;
+    text-decoration: none;
+}
+
+img {
+    width: 300px;
+    height: 150px;
+}

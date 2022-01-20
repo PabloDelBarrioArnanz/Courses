@@ -1,0 +1,31 @@
+
+#titulo1 {
+    color: #f72585;
+    text-align: center;
+    margin:  15px;
+}
+
+p {
+    color: #457b9d
+}
+
+div {
+    margin: 35px 5px;
+    padding: 15px;
+}
+
+.titulo2 {
+    color: #3f37c9;
+}
+
+.tarjeta {
+    border: 10px solid #560bad;
+    background-color: #f1faee;
+    text-align: center;
+    margin: 15px 100px;
+    padding: 15px;
+}
+
+.creador {
+    color: #f72585;
+}
