@@ -1,0 +1,55 @@
+h1 {
+  text-align: center;
+}
+
+.color-rojo {
+  background-color: firebrick;
+}
+
+.color-rosa {
+  background-color: hotpink;
+}
+
+.color-amarillo {
+  background-color: gold;
+}
+
+.color-violeta {
+  background-color: blueviolet;
+}
+
+.color-verde {
+  background-color: lime;
+}
+
+.color-azul {
+  background-color: turquoise;
+}
+
+.color-rojo, .color-rosa, .color-violeta {
+  color: white;
+}
+
+.borde-rojo {
+  border: 5px solid darkgray;
+}
+
+.borde-rosa {
+  border: 5px dashed darkgray;
+}
+
+.borde-amarillo {
+  background-color: gold;
+}
+
+.borde-violeta {
+  border: 5px dotted darkgray;
+}
+
+.borde-verde {
+  border: 10px double darkgray;
+}
+
+.borde-azul {
+  background-color: turquoise;
+}
