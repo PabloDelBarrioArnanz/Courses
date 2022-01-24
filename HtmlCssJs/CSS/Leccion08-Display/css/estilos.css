@@ -1,0 +1,21 @@
+
+h4, div, p {
+    border: 3px solid blueviolet;
+    text-align: center;
+    color: cornflowerblue;
+    padding: 10px;
+    display: block; /* Por defecto son bloque cada uno en una línea */
+}
+
+span {
+    border: 1px solid blue;
+    display: inline; /* El span por defecto es inline */
+}
+
+.none {
+    display: none; /* No se muestra y no ocupa */
+}
+
+.hidden {
+    visibility: hidden; /* No se muestra pero ocupa */
+}
