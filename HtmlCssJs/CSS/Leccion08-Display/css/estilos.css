@@ -16,6 +16,15 @@ span {
     display: none; /* No se muestra y no ocupa */
 }
 
+.inline-block {
+    background-color: cornflowerblue;
+    border: 2px solid black;
+    padding: 15px;
+    height: 40px;
+    width: 300px;
+    display: inline-block; /* A los elementos inline no se les puede cambiar el tamaño ni padding, pero si los hacemos inline block si y siguen siendo elementos inline */
+}
+
 .hidden {
     visibility: hidden; /* No se muestra pero ocupa */
 }

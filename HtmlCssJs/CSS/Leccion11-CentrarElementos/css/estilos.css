@@ -1,0 +1,27 @@
+
+
+h1 {
+    text-align: center;
+    color: crimson;
+}
+
+div.contenedor {
+    position: relative;
+    border: 5px dashed greenyellow;
+    width: 30%;
+    margin: auto;
+}
+
+img.imagen {
+    position: relative;
+    opacity: .7;
+    width: 100%;
+}
+
+div.centro {
+    position: absolute;
+    top: 85%;
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+}

@@ -49,7 +49,7 @@ h1 {
     margin: 30px auto;
     top: 850px;
     left: 500px;
-    /* Se posiciona donde le asignemos con pixeles su espacio original está libre pero acompaña el desplazamiento de la pagina.
+    /* Se posiciona donde le asignemos con pixeles su espacio original está libre no acompaña el desplazamiento de la pagina.
        Solo funciona si su padre no es de tipo static.
     */
 }

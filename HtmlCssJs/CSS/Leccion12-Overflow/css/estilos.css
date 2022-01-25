@@ -1,0 +1,44 @@
+
+
+h1, h3 {
+    text-align: center;
+    color: crimson;
+}
+
+
+/* El overflow solo funciona si tenemos un alto definido si no, el contenedor se ampliaría hasta donde fuera necesario. */
+div.contenedor1 {
+    border: 5px dashed greenyellow;
+    width: 30%;
+    height: 50px;
+    margin: 10px auto 120px;
+    overflow: visible;
+}
+
+div.contenedor2 {
+    border: 5px dashed greenyellow;
+    width: 30%;
+    height: 50px;
+    margin: 10px auto 120px;
+    overflow: hidden; /* No se muestra lo que no cabe pero si está. */
+}
+
+div.contenedor3 {
+    border: 5px dashed greenyellow;
+    width: 30%;
+    height: 50px;
+    margin: 10px auto 120px;
+    overflow: scroll; /* No se muestra lo que no cabe pero si está. */
+}
+
+div.contenedor4 {
+    border: 5px dashed greenyellow;
+    width: 30%;
+    height: 50px;
+    margin: 10px auto 120px;
+    overflow: auto; /* Solo añade las barras cuando sean necesarias. */
+    /* Es posible definir solo el overflow en un eje.
+    overflow-y: ;
+    overflow-x: ;
+    */
+}
