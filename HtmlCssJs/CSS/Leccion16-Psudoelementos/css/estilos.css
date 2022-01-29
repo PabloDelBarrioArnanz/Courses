@@ -28,3 +28,12 @@ div.contenedor p::first-letter {
     color: red;
     font-size: 22px;
 }
+
+div.contenedor p::before {
+    content: "- "; /* Texto no seleccionable */
+}
+
+div.contenedor p::after {
+    color: red;
+    content: "-"; /* Texto no seleccionable */
+}

@@ -1,0 +1,56 @@
+
+h1 {
+    text-align: center;
+    text-shadow: 2px 2px 2px #a8dadc;
+    color: #e63046
+}
+
+div.contenedor {
+    width: 90%;
+    margin: 20px auto;
+    display: flex; /* Hace que los elementos contenido sean inline por defecto */
+    background-color: #560bad;
+    /*flex-direction: column;  Columnas */
+    /*flex-direction: column-reverse;  Columnas al revés */
+    /*flex-direction: row; */
+    /*flex-direction: row-reverse; */
+    /*flex-wrap: wrap;  Si no caben en la línea pasan a la línea de abajo */
+    flex-flow: row wrap; /* Forma comprimida */
+    /*justify-content: space-between;  El mismo espacio entre los elementos pero separados */
+    /*justify-content: space-around; El mismo espacio entre los elementos menos separados */
+    /*justify-content: space-evenly; El mismo espacio entre los elementos y bordes */
+    justify-content: center; /* Centrar los elementos */
+    height: 250px;
+    /*align-items: flex-start; /* Así aunque el div sea muy alto no se alargan hacia abajo */
+    align-items: center; /* Los mismo pero al centro */
+    /*align-items: stretch; por defecto, deja que crezcan */
+}
+
+P {
+    text-align: center;
+}
+
+p.parrafo1 {
+    order: 1;
+    flex-grow: 1;
+    flex-basis: 150px;
+    align-self: center; /* Para centrar de uno en uno */
+}
+
+p.parrafo2 {
+    order: 2;
+    flex-grow: 1;
+}
+
+p.parrafo3 {
+    order: 3;
+    flex-grow: 5; /* 5 veces más grande que los otros */
+}
+
+div.contenedor > p {
+    background-color: #8495ef;
+    color: #f1faee;
+    margin: 20px;
+    padding: 15px;
+    font-size: 1.5em;
+}
