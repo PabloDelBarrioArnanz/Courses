@@ -1,4 +1,4 @@
-package part1ScalaBasics
+package part1SugarSyntaxAndPatternMatching
 
 import scala.annotation.tailrec
 import scala.util.Try
