@@ -1,6 +1,6 @@
 package part2AdvanceFunctionalProgramming
 
-object Lecture04PartialFunctions extends App {
+object PartialFunctions extends App {
 
   // PF are function which only takes parameter from a subdomain
   val aFunction = (x: Int) => x + 1 // Function1[Int, Int] === Int => Int
@@ -80,4 +80,17 @@ object Lecture04PartialFunctions extends App {
   }
 
   scala.io.Source.stdin.getLines().map(chatbot).foreach(println)
+
+  /*
+    An examples
+    trait Seq[+A] extends PartialFunction[Int, A] {
+      def apply(index: Int): A --> function apply from Seq returns the element in position indicated in the parameter
+      this function only works for (0, length -1) so its a partial function, Seq are PartialFunctions
+    }
+
+    trait Map[A, +B] extends PartialFunction[A, B] {
+      def apply(key: A): B
+    }
+    Map its defined on the domain of its keys
+  */
 }
