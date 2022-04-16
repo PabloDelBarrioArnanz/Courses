@@ -35,6 +35,9 @@ package part2AdvanceFunctionalProgramming
   }
   List(1,2,3).map(_ * 2) = List(1,2,3).flatMap(x => List(x * 2))
   List(List(1,2),List(1,2,3)).flatten = List(List(1,2),List(1,2,3)).flatMap(x => x)
+
+  flatMap -> desenvuelve la monada(x) => 'x' aplica la funcion f(x) y esa misma función al aplicarse devuelve monada(y)
+  map     -> desenvuelve la monada(x) => 'x' aplica la funcion f(x) y esa  función al aplicarse devuelve 'y' entonces es necesario hacer unit(y)
 */
 
 object Monads extends App {
