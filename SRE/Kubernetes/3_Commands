@@ -1,0 +1,31 @@
+
+1. GET obtener informacion
+    - kubectl get nodes               -> listar nodos
+    - kubectl get ns                  -> listar namespaces
+    - kubectl -n kube-system get pods (-o wide)-> listar pods por namespace kube-system | -o wide más info
+
+2. CONFIG
+    - kubectl config get-contexts -> lista todos los contextos disponibles (fichero kubeconfig)
+
+3. EDIT e
+
+4. DELETE
+    - kubectl delete pod nombre_pod
+
+5. APPLY aplicar manifiestos
+    - kubectl apply -f nombre_fichero.yml -> aplica ese manifiesto en el namespace default
+
+6. EXEC ejecutar un comando en un contenedor (similar a docker)
+    - kubectl exec -it nombrePod -- sh -> abrir una terminal en ese pod
+
+7. LOGS
+
+8. CP copiar archivos desde y hasta nuestra máquina y los contenedores
+
+9. PORT-FORWARD
+
+10. CORDON hacemos que un nodo no reciba contenedores
+
+11. UNCORDON deshacenos el cordon
+
+12. DRAIN drenar un nodo, saca todos los contenedores y los creará en otro nodo

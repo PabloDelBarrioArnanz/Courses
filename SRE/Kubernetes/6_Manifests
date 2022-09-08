@@ -1,0 +1,17 @@
+
+Manifiestos, archivos de configuración con la declaración de nuestra necesidades para kubernetes, se aplican con:
+kubectl apply -f nombre_fichero.yml
+
+Manifiesto para crear un pod,
+
+apiVersion: v1               #versión de la api de kubernetes
+kind: Pod
+metadata:                    #etiquetas o nombres
+  name: nginxpod             #set pod name nginxpod
+spec:                        #declarar los contenedores (todos tendrán la misma ip)
+  containers:                #un solo contenedor con una imagen nginx:alpine y de nombre nginxcontainer
+    - name: nginxcontainer
+      image: nginx:alpine
+
+Si hace kubectl apply -f nombre_fichero.yml creará el pod en el namespace default
+Si borramos este pod kubectl delete pod nginxpod, lo borrará y no creará otro porque no lo tenemos definido (no existe un deployment)

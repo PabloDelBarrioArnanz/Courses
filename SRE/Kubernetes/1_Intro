@@ -1,0 +1,11 @@
+
+Kubernetes es declarativo, se puede crear un manifiesto de deployment que creará un pod con x contenedores con y réplicas.
+Ese manifiesto se envía a la API de kubernetes y este intentará ejecutarlo con los workers, que están orquestados por el
+scheduler, en cada worker existe un kubelet que permite conectar todos los workers. De esta maner sabrá si hay problemas
+en los workers y podrá tomar medidas.
+
+Kubernetes partes
+- Control plane: api, scheduler, controller manager, etcd (bbdd key-value guarda el estado) y cloud controller manager se conecta a la api de tu proveedor de cloud
+  para crear y destruir intancias... etc de está forma te permite ejecutar un orquestador en una nuve y tener funcionalidades extra.
+
+- Nodos (ejecutan el kubelet para comunicarse entre con el control y kubeproxy para redirigir el tráfico entre intancias.

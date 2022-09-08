@@ -1,0 +1,12 @@
+Como usar kubernetes:
+
+1. Instalar kubectl (cliente)
+
+2. Instalar cluster Minikube, kind...
+   Minikube crea una máquina virtual con todos los componentes y te tiene plugins útiles
+
+3. kubeconfig, es un fichero de configuración donde se indica al cliente a que clusters se tiene conectar (contextos)**
+   Minikube en el start crear automáticamente este fichero
+
+Opcional
+4. Lens herramienta de visualización y monitorización

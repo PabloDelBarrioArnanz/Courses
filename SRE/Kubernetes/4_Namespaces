@@ -1,0 +1,11 @@
+
+Los namespaces son recursos de kubernetes, son divisiones lógicas dentro del clúster. Los datos entre namespace son visibles,
+aunque se pueden separar con políticas.
+Generalmente se usan para dividir tráfico y recursos.
+
+Por defecto siempre existe:
+    - default
+    - kube-node-lease
+    - kube-public
+    - kube-system
+Todos los que empiezan por kube son espacios reservados para las herramientas de kubernetes

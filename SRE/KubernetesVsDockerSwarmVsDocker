@@ -1,0 +1,28 @@
+
+Docker
+Forma de ejecutar tu app en una imagen, imagen generada por ti o descargada y se ejecuta en una maquina virtual o física.
+Ventaja la imagen tiene todas las depencias que tu app necesita. La imagen se ejecuta siempre igual.
+Docker compose - te permite crear un fichero que te levante varios contenedores configurados con 1 solo comando.
+Problema ejecutar tu app en varios servidores, se podría hacer a mano, máquina por máquina cambiando el docker compose.
+
+Para solventar este problema y añadir nuevas funcionalidades aparecen los orquestadores,
+los más famosos son kubernetes, docker swarm, mesos y openshift.
+Con todos se puede crear un servicio de alta disponibilidad.
+Permiten balanceo de carga entre todos los despliegues.
+Permiten actualizar las réplicas de la app por fases y una vez comprobado que funciona actualizar las demás.
+
+
+- Docker Swarm:
+    - Mas simple
+    - Mas liviano
+    - Usa el mismo cliente docker
+    - Es más que suficiente para la mayoría de casos
+
+- Kubernetes
+    - Mas complejo
+    - Mas pesado
+    - Mas funcionalidades, como autoscaling (se autoreplica en pods o se hace más grande el pod (más cpu/memoria) basado en reglas definidas.
+    - Buena integración con AWS, Google...
+    - Mejores métricas para monitorización
+    - Requiere un cliente nuevo llamado KUBECTL
+    - Comunidad mucho más grande

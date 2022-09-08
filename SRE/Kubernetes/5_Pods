@@ -1,0 +1,12 @@
+
+Un pod es set de contenedores, pueden ser 1 o más contenedores. Por lo general, se tiene un contenedor por pod, pero se
+pueden tener varios. Lo malo es que no se puede definir atributos para contenedores como uso de CPU o memoria, solo en el pod.
+Todos los contenedores que corren dentro de un pod tiene la misma ip.
+
+Los pods son autogenerados por un template de deployment, por lo que tiene un nombre seguido de hash para diferenciarlos.
+En listado (kubectl -n kube-system get pods) podemos ver en las columnas los pods que tienen, el estado, los restarts y la edad.
+Con -o wide podemos ver más info como la ip y el nodo.
+
+Si borramos un pod y en un manifiesto está escrito que son necesarios x pods para ese recurso se recreará.
+
+
