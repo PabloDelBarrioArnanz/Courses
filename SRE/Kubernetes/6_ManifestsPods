@@ -1,0 +1,63 @@
+
+Manifiestos, archivos de configuración con la declaración de nuestra necesidades para kubernetes, se aplican con:
+kubectl apply -f nombre_fichero.yml
+
+Manifiesto para crear un pod con un contenedor
+
+apiVersion: v1               #versión de la api de kubernetes
+kind: Pod
+metadata:                    #etiquetas o nombres
+  name: nginxpod             #set pod name nginxpod
+spec:                        #declarar los contenedores (todos tendrán la misma ip)
+  containers:                #un solo contenedor con una imagen nginx:alpine y de nombre nginxcontainer
+    - name: nginxcontainer
+      image: nginx:alpine
+
+Si hace kubectl apply -f nombre_fichero.yml creará el pod en el namespace default
+Si borramos este pod kubectl delete pod nginxpod, lo borrará y no creará otro porque no lo tenemos definido (no existe un deployment)
+
+Manifiesto para crear un pod con un contenedor con más configuración
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginxpod
+spec:
+  containers:
+  - name: nginxcontainer
+    image: nginx:alpine
+
+    env:                       #Variables de entorno**, nombre y valor iguales que en docker-compose
+    - name: MI_VARIABLE
+      value: "miValor"
+    - name: MI_OTRA_VARIABLE
+      value: "miOtroValor"
+    - name: DD_AGENT_HOST      #Variable que tiene un valor preasignado si no que lo obtiene de otro lugar
+      valueFrom:
+        fieldRef:
+          fieldPath: status.hostIP #Ip del host del donde se ejecuta y lo asigna a la variable
+
+    resources:                 #Recursos asignados al contenedor, esto se podría repetir por cada contenedor y el pod solicitará la suma los recuros de todos los contenedores
+      requests:                #Recuros requeridos, son recuros garantizados, siempre los tendrá disponibles
+        memory: "64Mi"
+        cpu: "200m"            #En 1 nodo con 1 solo core podemos tener un pod con 5 containers de 200Mi (en realidad no, por los pods de sistema de kubernetes)
+      limits:                  #Recuros máximos que puede consumir el contenedor, si se pasa el kernel de linux matará el proceso y reinicia el container
+        memory: "128Mi"
+        cpu: "500m"            #Si se pasa de 500m no lo matará, solo lo ahorcará (se puede sobrevender porque no siempre todos los servicios usarán el máximo
+
+    readinessProbe:            #Forma de explicar a kubernetes que tu pod está listo para recibir tráfico
+      httpGet:                 #Hará peticiones al puerto 80 con / para comprobar que responde
+        path: /
+        port: 80
+      initialDelaySeconds: 5
+      periodSeconds: 10
+
+    livenessProbe:            #Forma de explicar a kubernetes que tu pod está vivo
+      tcpSocket:              #Comprobará que el puerto está abierto para saber si está vivo
+        port: 80
+      initialDelaySeconds: 15
+      periodSeconds: 20
+    ports:                    #Puerto expuesto
+    - containerPort: 80
+
+readinessProbe y livenessProbe se usan los dos porque tu app puede que tarde mucho en arrancar entonces el contenedor está vivo, pero no listo todavía

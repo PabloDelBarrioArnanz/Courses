@@ -2,7 +2,8 @@
 1. GET obtener informacion
     - kubectl get nodes               -> listar nodos
     - kubectl get ns                  -> listar namespaces
-    - kubectl -n kube-system get pods (-o wide)-> listar pods por namespace kube-system | -o wide más info
+    - kubectl -n kube-system get pods (-o wide) -> listar pods por namespace kube-system | -o wide más info
+    - kubectl get pod nombrePod (-o yaml) -> listar un pod en concreto | -o yaml nos muestra el yaml de configuracion
 
 2. CONFIG
     - kubectl config get-contexts -> lista todos los contextos disponibles (fichero kubeconfig)
