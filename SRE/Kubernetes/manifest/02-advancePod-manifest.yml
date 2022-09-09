@@ -8,14 +8,14 @@ spec:
       image: nginx:alpine
 
       env:                       #Variables de entorno**, nombre y valor iguales que en docker-compose
-        - name: MI_VARIABLE
-          value: "miValor"
-        - name: MI_OTRA_VARIABLE
-          value: "miOtroValor"
-        - name: DD_AGENT_HOST      #Variable que tiene un valor preasignado si no que lo obtiene de otro lugar
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP #Ip del host del donde se ejecuta y lo asigna a la variable
+      - name: MI_VARIABLE
+        value: "miValor"
+      - name: MI_OTRA_VARIABLE
+        value: "miOtroValor"
+      - name: DD_AGENT_HOST      #Variable que tiene un valor preasignado si no que lo obtiene de otro lugar
+        valueFrom:
+          fieldRef:
+            fieldPath: status.hostIP #Ip del host del donde se ejecuta y lo asigna a la variable
 
       resources:                 #Recursos asignados al contenedor, esto se podría repetir por cada contenedor y el pod solicitará la suma los recuros de todos los contenedores
         requests:                #Recuros requeridos, son recuros garantizados, siempre los tendrá disponibles

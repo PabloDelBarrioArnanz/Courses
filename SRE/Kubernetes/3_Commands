@@ -4,6 +4,7 @@
     - kubectl get ns                  -> listar namespaces
     - kubectl -n kube-system get pods (-o wide) -> listar pods por namespace kube-system | -o wide más info
     - kubectl get pod nombrePod (-o yaml) -> listar un pod en concreto | -o yaml nos muestra el yaml de configuracion
+    - kubectl get pvc -> listar los pvc
 
 2. CONFIG
     - kubectl config get-contexts -> lista todos los contextos disponibles (fichero kubeconfig)
@@ -12,6 +13,8 @@
 
 4. DELETE
     - kubectl delete pod nombre_pod
+    - kubectl delete deployment nombre_pod
+    - kubectl delete -f fichero.yml -> borrará lo especificado en el fichero
 
 5. APPLY aplicar manifiestos
     - kubectl apply -f nombre_fichero.yml -> aplica ese manifiesto en el namespace default
@@ -30,3 +33,7 @@
 11. UNCORDON deshacenos el cordon
 
 12. DRAIN drenar un nodo, saca todos los contenedores y los creará en otro nodo
+
+13. DESCRIBE muestra más información de un recurso
+   - kubectl describe pods
+   - kubectl describe pvc

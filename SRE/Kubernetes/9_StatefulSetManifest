@@ -1,0 +1,43 @@
+
+Es una forma de crear pods que además de crearlos como en los otros métodos también tiene un volumen (similar docker)
+que es un directorio/disco.
+
+Sirve por ejemplo para BBDD.
+Si ejecutases un deployment normal para un BBDD cuando reinicie se perderán los datos.
+
+PVC -> persistant volumen client -> peticion de disco desde kubernetes al proveedor
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: my-csi-app-set
+spec:
+  selector:
+    matchLabels:
+      app: mypod
+  serviceName: "my-frontend"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mypod
+    spec:
+      containers:
+      - name: my-frontend
+        image: busybox
+        args:    #Como el docker run
+        - sleep
+        - infinity
+        volumeMounts: #Nombre del volumen y la ruta
+        - mountPath: "/data"
+          name: csi-pvc
+  volumeClaimTemplates: #Creación del volumen definido arriba
+  - metadata:
+      name: csi-pvc
+    spec:
+      accessModes:
+      - ReadWriteOnce   #Para que pueda escribir y leer
+      resources:
+        requests:
+          storage: 1Gi
+      storageClassName: do-block-storage #storageClass driver de kubernetes (crea un disco virtual y lo conecta en el nodo donde está el pod)
