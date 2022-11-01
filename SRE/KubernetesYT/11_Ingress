@@ -1,0 +1,13 @@
+
+Ingress recurso parecido a los sercios pero no es un sercio, muy usado
+Es necesario intalarlo a parte
+
+Nos permite crear accesos a nuestros sercios basados en el path
+kubernetes crea un un ngnix y con un controller redige a donde le hayamos indicado
+Además crea un loadbalancer con una ip publica que es la misma del ingress
+
+Ejemplo tenemos 3 pod con imagenV1 y un servicio nodePortV1 que balancea entre todos y tambien tenemos otros 3
+pod con imagenV2 y otro sercio nodeportV2 que balance entre estos 3 últimos pods
+Si creamos un ingress podemos definir por el path cuando queremos que se use el conjunto 1 o el segundo 2 atraves del sercio
+
+uso desde internet curl http://ipPublic(Ingress/loadBalancerIngress)/etc

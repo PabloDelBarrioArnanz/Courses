@@ -1,10 +1,12 @@
 
 1. GET obtener informacion
-    - kubectl get nodes               -> listar nodos
-    - kubectl get ns                  -> listar namespaces
+    - kubectl get nodes                         -> listar nodos
+    - kubectl get ns                            -> listar namespaces
     - kubectl -n kube-system get pods (-o wide) -> listar pods por namespace kube-system | -o wide más info
-    - kubectl get pod nombrePod (-o yaml) -> listar un pod en concreto | -o yaml nos muestra el yaml de configuracion
-    - kubectl get pvc -> listar los pvc
+    - kubectl get pod nombrePod (-o yaml)       -> listar un pod en concreto | -o yaml nos muestra el yaml de configuracion
+    - kubectl get pvc                           -> listar los pvc
+    - kubectl get ing                           -> listar ingress
+    - kubectl get all                           -> listar todos los recursos
 
 2. CONFIG
     - kubectl config get-contexts -> lista todos los contextos disponibles (fichero kubeconfig)
@@ -34,6 +36,7 @@
 
 12. DRAIN drenar un nodo, saca todos los contenedores y los creará en otro nodo
 
-13. DESCRIBE muestra más información de un recurso
+13. DESCRIBE muestra más información de los recursos o de uno en concreto si añadimos el nombre
    - kubectl describe pods
    - kubectl describe pvc
+   - kubectl describe svc

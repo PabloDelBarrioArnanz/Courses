@@ -1,0 +1,39 @@
+#Despliega un pod con 3 replicas de una app de google
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      role: hello #label and name for label
+  template:
+    metadata:
+      labels:
+        role: hello
+    spec:
+      containers:
+      - name: hello
+        image: gcr.io/google-samples/hello-app:1.0
+        ports:
+        - containerPort: 8080
+
+#Servicio NodePort IP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello
+spec:
+  type: NodePort   #Seleccion del servicio deseado
+  ports:
+    - port: 8080       #Tiene el puerto 8080 y apunta al puerto 8080 del contenedor
+      targetPort: 8080
+      nodePort: 30000  #Puerto en cada nodo para llegar al servicio
+  selector:        #Con el selector por tag role = hello sabe que tiene que redirigir el tráfico a uno de los pods con esa etiqueta
+    role: hello
+
+#Si una vez que este levantado hacemos kubectl describe svc hello
+#Al crear el puerto en cada nodo (aunque no tenga pods de ese tipo) siempre que ataquemos a ese puerto el trafico va a uno de los pods
+#Uso desde fuera del cluster curl http://ipNodo:30000 -> te redirige a cualquier nodo pod de los 3

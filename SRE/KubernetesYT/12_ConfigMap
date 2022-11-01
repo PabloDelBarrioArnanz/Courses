@@ -1,0 +1,3 @@
+Fichero en el cluster al que pueden acceder los pods
+
+En el manifiesto se pueden referir a variables del fichero configMap y reasignarlas a variables de entorno del contenedor

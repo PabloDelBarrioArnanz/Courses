@@ -1,0 +1,16 @@
+
+Pod Networking
+ - Cada pod tiene su propia IP -> Pod con 3 contenedores, todos los contenedores tienen la misma ip
+ - IP routing
+
+Cloud Cluster networking interface -> agente que corre en cada nodo para crear una una "red vpn" entre todos los pods
+
+calico -> agente que corre en cada nodo, crea rutas ip entre los pods para que se pueda llegar de un pod a otro pod
+
+* Kubernete Services: Kube-proxy
+
+Servicios que contactan aplicaciones (set de pods) entre ellos y desde fuera
+
+1. Cluster IP    -> ip fija dentro del cluster hace de loadbalancer entre los pods asignados a ese servicio (solo dentro del cluster)
+2. Node port     -> crea un puerto en cada nodo que recibe el tráfico y los pods que lo necesitan
+3. Load Balancer -> asociado a la nube, balance la carga entre los pod

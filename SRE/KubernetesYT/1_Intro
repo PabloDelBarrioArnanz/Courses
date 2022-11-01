@@ -1,4 +1,6 @@
 
+Curos = https://www.youtube.com/watch?v=DCoBcpOA7W4&t=169s
+
 Kubernetes es declarativo, se puede crear un manifiesto de deployment que creará un pod con x contenedores con y réplicas.
 Ese manifiesto se envía a la API de kubernetes y este intentará ejecutarlo con los workers, que están orquestados por el
 scheduler, en cada worker existe un kubelet que permite conectar todos los workers. De esta maner sabrá si hay problemas

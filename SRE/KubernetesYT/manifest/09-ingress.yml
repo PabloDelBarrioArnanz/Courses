@@ -1,0 +1,97 @@
+#3 pods con imagen de google v1
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      role: hello-v1
+  template:
+    metadata:
+      labels:
+        role: hello-v1
+    spec:
+      containers:
+        - name: hello-v1
+          image: gcr.io/google-samples/hello-app:1.0
+          ports:
+            - containerPort: 8080
+
+---
+#3 pods con imagen de google v2
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-v2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      role: hello-v2
+  template:
+    metadata:
+      labels:
+        role: hello-v2
+    spec:
+      containers:
+        - name: hello-v2
+          image: gcr.io/google-samples/hello-app:2.0
+          ports:
+            - containerPort: 8080
+
+---
+#Servicio nodeport que redige tráfico entre los pods con tag hello-v1
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-v1
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    role: hello-v1
+
+---
+#Servicio nodeport que redige tráfico entre los pods con tag hello-v2
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-v2
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    role: hello-v2
+
+---
+#Servicio ingress que redirige con el path entre los backend especificados version v1 y la v2
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-app
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /v1
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-v1
+                port:
+                  number: 8080
+          - path: /v2
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-v2
+                port:
+                  number: 8080
+
+#Uso desde internet curl http://ipPublic(Ingress/loadBalancerIngress)/v1 -> redirecciona al servcio v1
+#curl http://ipPublic(Ingress/loadBalancerIngress)/v2 -> redirecciona al servcio v2
+#curl http://ipPublic(Ingress/loadBalancerIngress)/lfhag -> 404
