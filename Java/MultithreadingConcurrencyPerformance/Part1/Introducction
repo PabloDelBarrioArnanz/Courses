@@ -1,0 +1,19 @@
+
+COURSE => https://www.udemy.com/course/java-multithreading-concurrency-performance-optimization
+
+Porqué necesitamos threads?
+
+1. Responsiveness
+    Para muchas aplicaciones es necesario poder realizar varios procesos al mismos tiempo y es muy frustrante tener que
+    esperar entre operación y operación sobretodo en aplicaciones con UI.
+    (Ejemplo movie player 1 hilo reproduce 1 hilo mustra información cuando pasamos el curos por la pantalla)
+    La Responsiveness se puede lograr de esta manera teniendo varios hilos (generalmente es dificil lograla de otra manera)
+    Concurrencia = Multitarea
+
+2. Performance
+    Usando la concurrencia podemos crear muchas tareas que se ejecutes en paralelo usando un solo núcleo
+    Con multiples núcleos podemos realmente ejecutar tareas en paralelo completamente
+
+Hilos    -> Se crean y destruyen más rapido, comparten mas datos como el (heap, code, process open files, process metadata)
+            Cambiar entre hilos del mismo proceso es más rápido (cambios de contexto más rapidos)
+Procesos -> Más seguridad y estabilidad por el aislamiento
