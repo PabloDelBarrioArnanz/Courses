@@ -1,4 +1,4 @@
-public class Lesson5PerformanceAndOptimizingForThroughput {
+public class Lesson2PerformanceAndOptimizingForThroughput {
 
     /*
         Throughput = the amount of task completed in a given period. Measured in tasks/time unit

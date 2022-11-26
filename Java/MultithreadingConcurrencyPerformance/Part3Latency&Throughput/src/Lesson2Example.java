@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class Lesson5Example {
+public class Lesson2Example {
 
     private static final String INPUT_FILE = "./Part3/resources/war_and_peace.txt";
     private static final int NUMBER_OF_THREADS = 4;

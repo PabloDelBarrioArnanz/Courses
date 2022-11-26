@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lesson4Example {
+public class Lesson1Example {
 
     public static final String SOURCE_FILE = "./Part3/resources/many-flowers.jpg";
     public static final String DESTINATION_FILE = "./Part3/resources/many-flowers-result.jpg";

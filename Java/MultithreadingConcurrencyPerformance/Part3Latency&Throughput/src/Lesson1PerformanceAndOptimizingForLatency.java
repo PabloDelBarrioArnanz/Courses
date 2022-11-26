@@ -1,5 +1,5 @@
 
-public class Lesson4PerformanceAndOptimizingForLatency {
+public class Lesson1PerformanceAndOptimizingForLatency {
 
     /*
         1. Performance criteria definition - criteria to check/compare the performance of our app
