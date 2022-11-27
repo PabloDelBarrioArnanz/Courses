@@ -8,8 +8,9 @@ public class Lesson2AtomicVolatile {
          - Get and set references to objects its atomic
              Example getters and setters in a class
          - All assignment to primitive vars except long and double
-         - Volatile modification make assignment volatile and disable memory optimizations for independent memory caches
-           making write this var in RAM
+         - Volatile modification make assignment for longs and doubles atomic
+           Disable memory optimizations for independent memory caches (guaranteeing execution order)
+           Made write this var in RAM
             volatile double x = 1.0;
             volatile double y = 2.0;
             a = y; //atomic
