@@ -18,7 +18,7 @@ public class Lesson1SynchronizedBlockAndMethod {
              - With this locking mechanism we can have separated critical sections
              - Not all method it's synchronized
 
-        Synchronized block and method it's called Reentrat, in other words if a thread is accessing a synchronized method
+        Synchronized block and method it's called Reentrant, in other words if a thread is accessing a synchronized method
         while already being in a different synchronized method or block, it will be able to access that synchronized method
         with no problem. Basically a thread cannot prevent itself entering a critical section.
 
