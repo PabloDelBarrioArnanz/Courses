@@ -187,7 +187,7 @@ public class Lesson1Semaphore {
                     System.out.println("Setting element...");
                     queue.offer(item);
                 } else {
-                    System.out.println("Full"); //Error we are loosing items bcs can't be storage
+                    System.out.println("Full"); //Error we are loosing items bcs can't be storage, we can avoid this making the production inside the lock, but it's like have only one producer
                 }
                 writeLock.unlock();
                 full.release();
