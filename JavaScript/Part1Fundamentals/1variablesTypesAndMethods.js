@@ -82,7 +82,7 @@ Dynamically typed language
 
 //Primitive data types
 const name = 'John Doe'
-const age = 25
+const age = 35
 const hasKinds = false
 const car = null
 let something;
@@ -278,9 +278,97 @@ console.log(firstName.includes('t'))
 
 //Arrays and methods
 //Are mutable and iterable
+//push, unshift, pop, shift, splice, reverse, sort are mutating
 
-const arrayNumbers = [1, 2, 3, 4, 5]
+let arrayNumbers = [1, 2, 3, 4, 5]
 const arrayNumbers2 = new Array(1, 2, 3, 4, 5)
+const fruit = ['banana', 'orange', 'pear', 'apple']
+const mix = ['apple', true, 1, {d: 1}, undefined, null, () => ""]
 
 console.log(arrayNumbers)
 console.log(arrayNumbers2)
+console.log(mix)
+
+console.log(arrayNumbers.length)
+console.log(Array.isArray(arrayNumbers))
+
+arrayNumbers.push(500) //add at the end
+arrayNumbers.unshift(-500) //add at the start
+const pop = arrayNumbers.pop() //take last value
+const shift = arrayNumbers.shift() //take first value
+console.log(arrayNumbers)
+console.log(pop)
+console.log(shift)
+
+const slice = arrayNumbers.splice(1, 2,'test1', 'test2')
+console.log(arrayNumbers) //at position 1 removes 2 items and add 2 items and returns deleted part
+console.log(slice)
+
+arrayNumbers = [1, 2, 3, 4, 5]
+arrayNumbers.reverse()
+console.log(arrayNumbers)
+arrayNumbers.reverse()
+console.log(arrayNumbers.concat(6, 7))
+
+fruit.sort()
+console.log(fruit)
+
+numbers.reverse()
+console.log(numbers)
+numbers.sort(function(x, y) {
+    return x - y
+})
+numbers.sort((x, y) => x - y)
+
+console.log(numbers.find(num => num > 2)) //like findFirst not mutating
+console.log(numbers.filter(num => num > 2)) //filters the array not mutating
+
+
+//Object literals
+const pabloPerson = {
+    name: 'Pablo',
+    lastName: 'Barrio',
+    age: 25,
+    email: 'pablo@gmail.com',
+    hobbies: ['movies', 'music'],
+    address: {
+        city: 'Madrid',
+        country: 'Spain' 
+    },
+    getBirthday: function() {
+        return new Date().getFullYear() - this.age
+    },
+    getBirthday2: () => new Date().getFullYear() - this.age, //can't access age
+    getBirthday3() { //Not property, it's a method
+        return new Date().getFullYear() - this.age
+    },
+}
+
+/*
+Important
+ 1. arrow functions cannot use this, super and should not be used as methods
+ 2. Cannot be used as constructors
+ 3. Cannot use yield
+*/
+
+console.log(pabloPerson.name) //most used way
+console.log(pabloPerson['name'])
+console.log(pabloPerson.address.city)
+console.log(pabloPerson['address']['city'])
+console.log(pabloPerson.getBirthday())
+console.log(pabloPerson.getBirthday2())
+console.log(pabloPerson.getBirthday3())
+
+const getBirthFunction = pabloPerson.getBirthday
+console.log(getBirthFunction()) //Not working this.age from function not available here
+//Study binding
+
+
+//Date and Times
+const today = new Date();
+const birth = new Date('3-5-1997');
+console.log(birth)
+console.log(today)
+console.log(today.getMonth())
+console.log(today.getDay()) //week
+console.log(today.getDate())
