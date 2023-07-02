@@ -16,3 +16,4 @@ out/
 #ide
 *.iml
 .idea/
+**.DS_Store
