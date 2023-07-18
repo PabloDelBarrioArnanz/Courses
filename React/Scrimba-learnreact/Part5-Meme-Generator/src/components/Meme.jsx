@@ -1,20 +1,42 @@
 
-import { useState } from "react"
-import memeData from "../memeData"
+import { useEffect, useState } from "react"
+//import memeData from "../memeData"
 
 
 export default function Input() {
 
-    const memeDataList = useState(memeData.data.memes)
+    //const memeDataList = useState(memeData.data.memes)
+    const [memeDataList, setMemeDataList] = useState({})
+
+
+    //The use effect function can't be async bcs can return a function to cleanup but an async function will return a promise
+    /*useEffect(() => {
+        console.log("Fetching memes images")
+        fetch("https://api.imgflip.com/get_memes")
+            .then(data => data.json())
+            .then(jsonData => jsonData.data.memes)
+            .then(memes => setMemeDataList(memes))
+    }, [])
+    */
+
+    useEffect(() => {
+        console.log("Fetching memes images")
+        async function getMemes() {
+            const res = await fetch("https://api.imgflip.com/get_memes")
+            const data = await res.json()
+            setMemeDataList(data.data.memes)
+        }
+        getMemes()
+    }, [])
 
     function getRandomMeme() {
-        return memeDataList[0][Math.floor(Math.random() * memeDataList[0].length)].url
+        return memeDataList[Math.floor(Math.random() * memeDataList.length)].url
     }
 
     const [meme, updateMeme] = useState({
         topText: "",
         bottomText: "",
-        randomImage: getRandomMeme()
+        randomImage: "https://i.imgflip.com/30b1gx.jpg"
     })
 
     function getNewMeme() {
