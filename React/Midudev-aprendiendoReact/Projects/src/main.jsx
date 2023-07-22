@@ -1,10 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import CatApp from './exercises/04-CatAp/solution/CatApp'
+import App from './exercises/06-CarritoCompra/App'
+import { FiltersProvider } from './exercises/06-CarritoCompra/context/filters.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <>
-        <CatApp />
-    </>
+    <FiltersProvider>
+        <App />
+    </FiltersProvider>
 )
