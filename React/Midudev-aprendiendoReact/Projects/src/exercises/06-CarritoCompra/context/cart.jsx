@@ -1,8 +1,35 @@
-import React, { createContext, useState } from "react"
+import React, { createContext, useReducer } from "react"
+import { initialState, cartReducer, CART_ACTIONS } from '../reducers/reducer.js'
 
 export const CartContext = createContext()
 
+/*
+    Con el reducer nos ahorramos el estado y toda la lógica de actualización del estado está fuera del estado
+    Por lo que se prueba mas facil
+*/
+function useCartReducer () {
+    const [state, dispatch] = useReducer(cartReducer, initialState)
+
+    const addToCart = product => dispatch({
+        type: CART_ACTIONS.ADD_TO_CART,
+        payload: product
+    })
+
+    const removeFromCart = product => dispatch({
+        type: CART_ACTIONS.REMOVE_FROM_CART,
+        payload: product
+    })
+
+    const clearCart = () => dispatch({
+        type: CART_ACTIONS.CLEAR_CART
+    })
+
+    return { state, addToCart, removeFromCart, clearCart }
+}
+
 export function CartProvider ({children}) {
+    //Para evitar tener muchas funciones y seteos del estado se puede usar un reducer y el useReducer
+    /*
     const [cart, setCart] = useState([])
 
     const addToCart = product => 
@@ -30,11 +57,13 @@ export function CartProvider ({children}) {
                 return [...prev]
             }
             return prev
-        })
+    })
+    */
+    const { state, addToCart, removeFromCart, clearCart } = useCartReducer()
 
     return (
         <CartContext.Provider value={{
-            cart,
+            cart: state,
             addToCart,
             clearCart,
             removeFromCart

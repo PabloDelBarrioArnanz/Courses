@@ -6,6 +6,26 @@ import { CartIcon, ClearCartIcon, RemoveFromCartIcon } from "./Icons"
 import './Cart.css'
 
 
+function CartItem ({ id, title, thumbnail, quantity, addToCart, removeFromCart}) {
+    return (
+        <li key={id}>
+            <img src={thumbnail} alt={title}></img>
+            <div>
+                <strong>{title}</strong>
+            </div>
+            <footer>
+                <button onClick={removeFromCart}>
+                    -
+                </button>
+                <small>Qty: {quantity}</small>
+                <button onClick={addToCart}>
+                    +
+                </button>
+            </footer>
+        </li>
+    )
+}
+
 export function Cart () {
     const  cartCheckBoxId = useId()
     const { cart, addToCart, removeFromCart, clearCart } = useCart()
@@ -23,21 +43,10 @@ export function Cart () {
                 <ul>
                     {
                         cart.map(product => (
-                            <li key={product.id}>
-                                <img src={product.thumbnail} alt={product.title}></img>
-                                <div>
-                                    <strong>{product.title}</strong>
-                                </div>
-                                <footer>
-                                    <button onClick={() => removeFromCart(product)}>
-                                        -
-                                    </button>
-                                    <small>Qty: {product.quantity}</small>
-                                    <button onClick={() => addToCart(product)}>
-                                        +
-                                    </button>
-                                </footer>
-                            </li>
+                            <CartItem key={product.id} 
+                                addToCart={() => addToCart(product)}
+                                removeFromCart={() => removeFromCart(product)}
+                                {...product}/>
                         ))
                     }
                 </ul>
