@@ -1,0 +1,113 @@
+* {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.comments-side {
+  margin: 25px;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.savecomment-side {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background: black;
+}
+
+.comment-div {
+  font-size: 1rem;
+  padding: 30px;
+  width: 80%;
+  max-width: 400px;
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+}
+
+.comment-save {
+  gap: 15px;
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.comment-save > form {
+  width: 80%;
+}
+
+input,
+textarea {
+  width: 100%;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input,
+textarea {
+  border-radius: 10px;
+}
+
+input {
+  height: 30px;
+  padding: 5px;
+  max-width: 450px;
+}
+
+textarea {
+  max-width: 450px;
+  height: 150px;
+  padding: 7px;
+}
+
+button {
+  max-width: 250px;
+  height: 40px;
+  width: 250px;
+  border-radius: 30px;
+  border: none;
+}
+
+.save-comment-button {
+  background: blue;
+  color: white;
+}
+
+.save-comment-button:hover {
+  background: rgb(59 130 246 / 0.5);
+}
+
+.saving-comment-button {
+  background: lightgray;
+  color: black;
+}
+
+h3 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+h4 {
+  color: white;
+}
+
+.comment-div:hover {
+  background: #e5e7eb;
+}
