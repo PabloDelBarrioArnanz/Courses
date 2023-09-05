@@ -31,15 +31,15 @@ private fun someDirection(): Direction {
 }
 
 enum class Commander(private val selector: (String) -> Boolean, val executor: (String) -> String) {
-    TO_UPPER_CASE({ selected -> selected === "TO_UPPER_CASE" }, { value -> value.uppercase(Locale.getDefault()) }),
-    TRIM({ selected -> selected === "TRIM" }, { value -> value.trim() });
+    TO_UPPER_CASE({ it === "TO_UPPER_CASE" }, { it.uppercase(Locale.getDefault()) }),
+    TRIM({ it === "TRIM" }, { it.replace(" ", "") });
 
     object CommanderObj {
         fun checkOperation(selector: String, value: String): String {
-            return entries.filter { commanderCase -> commanderCase.selector.invoke(selector) }
-                .map { commanderCase -> commanderCase.executor.invoke(value) }
+            return entries.filter { it.selector.invoke(selector) }
+                .map { it.executor(value) } // it.executor.invoke(value)
                 .firstOrNull()
-                ?: ""
+                ?: "No operation found"
             // .first() throws exception si no encuentra ninguno
             // .single() throws exception si no encuentra ninguno
 
