@@ -1,4 +1,4 @@
-
+## Info from youtube video see also java files from RockTheJVM
 ### Java 19 - Game of Loom: Implementation patterns and performance implications playing with virtual threads
 
 #### JDK native threads are thin wrappers around operating system threads
