@@ -1,4 +1,4 @@
-package enum_example.example2;
+package functionalenum.example2;
 
 public interface Operator {
     String apply(String input);

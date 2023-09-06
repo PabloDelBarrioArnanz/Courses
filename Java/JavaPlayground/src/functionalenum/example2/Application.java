@@ -1,4 +1,4 @@
-package enum_example.example2;
+package functionalenum.example2;
 
 import java.util.HashMap;
 import java.util.Map;

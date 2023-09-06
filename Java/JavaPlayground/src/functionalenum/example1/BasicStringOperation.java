@@ -1,4 +1,4 @@
-package enum_example.example1;
+package functionalenum.example1;
 
 public enum BasicStringOperation implements StringOperation {
 
