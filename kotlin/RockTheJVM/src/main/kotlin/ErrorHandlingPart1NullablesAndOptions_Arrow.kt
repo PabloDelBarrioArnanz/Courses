@@ -96,7 +96,8 @@ object ErrorHandling {
             }
         }
 
-        // Arrow library
+        // Arrow library provides a common way to work with option like in other languages
+        // https://arrow-kt.io/learn/typed-errors/nullable-and-option/
         fun sumSalariesArrow(jobId1: JobId, jobId2: JobId): Double? = nullable.eager {
             println("Searching for job $jobId1")
             val job1: Job = jobs.findById(jobId1).bind()
