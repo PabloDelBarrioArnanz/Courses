@@ -46,4 +46,11 @@ fun main() {
             x, y -> x + y
     }
 
+    // infix function solo se permite 1 parámetro y debe extender una clase
+    infix fun Int.plus(b: Int): Int = this + b
+
+    val sum = 34 plus 1
+
+    println(sum)
+
 }
