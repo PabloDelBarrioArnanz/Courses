@@ -1,0 +1,10 @@
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    max-width: 80%;
+    margin: 0 auto;
+    font-family: system-ui;
+}

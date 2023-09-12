@@ -1,0 +1,29 @@
+
+/*  */
+
+h1 {
+    color: blue;
+}
+
+p, img {
+    color: white;
+    background-color: crimson;
+    padding: 30px;
+    border: 10px solid powderblue;
+    margin: 50px;
+    text-align: center;
+}
+
+h2 {
+    color: brown;
+    /*margin-top: 40px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    margin-left: 60px;*/
+    
+    /*Se pueden poner así también*/
+    margin: 40px 10px 20px 50px;
+    /*margin: 40px 10px 20px; Esto quiere decir que los lados izquierdo y derecho son iguales */
+    /*margin: 40px 10px; Esto quiere decir que el margen arrriba y abajo son iguales y que los lados izquierdo y derecho son también */
+    /*margin: auto 50px Se centra el contenido con margen izq y derecha de 50px*/
+}

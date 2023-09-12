@@ -1,0 +1,69 @@
+
+h1 {
+    text-align: center;
+    color: crimson;
+    margin-top: 100px;
+}
+
+.centrar {
+    width: 50%; /* Antes de centrar es necesario dar un tamaño. */
+    border: 4px solid crimson;
+    margin: 30px auto; /* Centra el elemento. */
+}
+
+.static {
+    position: static;
+    width: 50%;
+    border: 4px solid crimson;
+    margin: 30px auto;
+    /* No afectan porque es static.
+    top: 100px;
+    left: 50px;
+    */
+}
+
+.relative {
+    position: relative;
+    width: 50%;
+    border: 4px solid crimson;
+    margin: 30px auto;
+    top: 50px;
+    left: 50px;
+    /* Ahora si afectan y su posición original se queda ocupada. */
+}
+
+.fixed {
+    position: fixed;
+    width: 50%;
+    border: 4px solid crimson;
+    margin: 30px auto;
+    top: 710px;
+    left: 500px;
+    /* Se posiciona donde le asignemos con pixeles su espacio original está libre y acompaña el desplazamiento de la pagina.  */
+}
+
+.absolute {
+    position: absolute;
+    width: 50%;
+    border: 4px solid crimson;
+    margin: 30px auto;
+    top: 850px;
+    left: 500px;
+    /* Se posiciona donde le asignemos con pixeles su espacio original está libre no acompaña el desplazamiento de la pagina.
+       Solo funciona si su padre no es de tipo static.
+    */
+}
+
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    /* Para que funcione en Safari */
+    width: 50%;
+    border: 4px solid crimson;
+    margin: 30px auto;
+    top: 0;
+    left: 500px;
+    /* Se comportar como un elemento absolute hasta que sale de pantalla y empieza a comportarse como un elemento fixed 
+       No funciona en Internet Explorer
+    */
+}

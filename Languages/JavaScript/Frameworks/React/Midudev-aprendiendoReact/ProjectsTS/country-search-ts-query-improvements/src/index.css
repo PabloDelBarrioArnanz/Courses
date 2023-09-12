@@ -1,0 +1,48 @@
+* {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background-color:rgb(36, 36, 36);
+    color: white;
+}
+
+header div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 35px;
+    gap: 5px;
+}
+
+input {
+    height: 30px;
+}
+
+button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color .25s;
+}
+
+h1 {
+    margin-top: 80px;
+    text-align: center;
+    font-size: 3.2em;
+}
+
+table {
+    width: 90%;
+    text-align: center;
+}
+
+.table--showColors > tr:nth-child(odd) td {
+   background-color: rgb(81, 81, 81);
+}
+
+.table--showColors > tr:nth-child(even) td {
+    background-color: rgb(51, 51, 51);
+}

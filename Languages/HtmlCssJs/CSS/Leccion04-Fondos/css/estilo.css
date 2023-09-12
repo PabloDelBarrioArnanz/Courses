@@ -1,0 +1,11 @@
+
+body {
+    background-color: dodgerblue;
+    color: cornsilk;
+
+    background-image: url("../img/fondo.png"); /* como es más pequeña que la pantalla se repite n veces*/
+    background-repeat: no-repeat; /* Se puede hacer que se repita solo en el eje x o eje y*/
+    background-position: left top;
+    background-attachment: fixed; /* El fondo se desplaza al mismo tiempo que la pagina*/
+    /* background: dodgerblue url("../img/fondo.png") no-repeat left top condensado;*/
+}

@@ -1,0 +1,85 @@
+/*
+    BOXMODEL
+
+    Todo elemento html esta contenido en 3 caja concentrcias 
+    Padding Nuestro contenido esta separado hasta el borde por el padding
+    Border El tamaño del borde de nuestro elemento html
+    Margen distancia que hay entre nuestro elemento y otros elementos html
+    
+    Outline
+    Se encuentra entre el margen y el borde, parte desde el borde sin no especificamos offset
+    no afecta al ancho porque se pone encima del margen, pero lo puede superar 
+
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #e63946
+}
+
+.div1 {
+    padding: 10px; /* Distancia desde el texto del div hasta el borde */
+    border: 15px solid #457b9d; /* Tamaño del borde */
+    margin: 20px; /* Separación con otros elementos html */
+    background-color: #f1faee; /* Afecta al contenido y al padding*/
+    width: 300px; /* Ancho total del contenido, nuestro elemento completo sería: 300+(10+15+20)x2 */
+    outline: 10px solid #8adedc;
+    outline-offset: 3px; /* Se paración entre el borde y el outline */
+    box-sizing: border-box; /* Con esta propiedad hacemos que el ancho de 300px es de todo no solo del contenido */
+}
+
+.div2 {
+    padding: 10px;
+    border: 0px;
+    margin: 0px; 
+    background-color: #f1faee;
+    width: 300px;
+    box-sizing: border-box; /* Con esta propiedad hacemos que el ancho de 300px sea del contenido y padding */
+}
+
+.div3 {
+    padding: 10px;
+    border: 0px;
+    margin: 0px; 
+    background-color: #f1faee;
+    max-width: 600px; /* Si la pantalla es mejor que el ancho que ponemos saldrá la barra de deslplazamiento pero si usamos max-with no creceramás de eso pero encogerá con la pantalla*/
+    box-sizing: border-box;
+}
+
+.div4 {
+    padding: 10px;
+    border: 5px solid #457b9d;
+    margin: auto; /* centra el contenido */
+    background-color: #f1faee;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+.div5 {
+    padding: 10px;
+    border: 5px solid #457b9d;
+    margin-left: 100px;
+    background-color: #f1faee;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+.div5 .interno {
+    margin: inherit; /* Hereda el margen del div5 para el párrafo */
+}
+
+/* Border collapse */
+.div6 {
+    padding: 10px;
+    border: 5px solid #457b9d;
+    margin: 20px; /* Si tenemos dos elementos y ponemos de margen 20px deberían estar separados por 40px,
+                     pero para los margenes superior e inferior se solapan y se queda el margen mas grande */
+    background-color: #f1faee;
+    width: 300px;
+    box-sizing: border-box;
+}

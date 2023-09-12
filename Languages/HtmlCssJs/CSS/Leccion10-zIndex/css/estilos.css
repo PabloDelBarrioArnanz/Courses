@@ -1,0 +1,38 @@
+
+/* 
+   Los elementos sin posicionar (position: static) su z-index es auto.
+   Los elementos posicionados se muestran encima por defecto.
+*/
+
+
+h1 {
+    text-align: center;
+    color: crimson;
+}
+
+div.estatico {
+    position: static;
+    padding: 15px;
+    border: 3px solid greenyellow;
+    background-color: whitesmoke; 
+}
+
+div.relativo {
+    position: relative;
+    padding: 15px;
+    top: -20px;
+    left: 10px;
+    border: 3px solid blueviolet;
+    background-color: bisque;
+    /* z-index: -1;  se mostraría detrás */
+}
+
+/* Por defecto como es el último añadido y es posicionado se mustra encima */
+div.absoluto {
+    position: absolute;
+    padding: 15px;
+    bottom: 0;
+    right: 0;
+    border: 3px solid cornflowerblue;
+    background-color: bisque;
+}

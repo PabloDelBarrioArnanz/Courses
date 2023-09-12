@@ -1,0 +1,98 @@
+h1 {
+  text-align: center;
+  margin: 20px;
+}
+
+.color-rojo {
+  background-color: firebrick;
+}
+
+.color-rosa {
+  background-color: hotpink;
+}
+
+.color-amarillo {
+  background-color: gold;
+}
+
+.color-violeta {
+  background-color: blueviolet;
+}
+
+.color-verde {
+  background-color: lime;
+}
+
+.color-azul {
+  background-color: turquoise;
+}
+
+.color-rojo, .color-rosa, .color-violeta {
+  color: white;
+}
+
+
+/* Bordes */
+.borde-solido {
+  border: 10px solid darkgray;
+}
+
+.borde-discontinuo {
+  border: 10px dashed darkgray;
+}
+
+.borde-punteado {
+  border: 10px dotted darkgray;
+}
+
+.borde-doble {
+  border: 10px double darkgray;
+}
+
+.borde-surco {
+  border: 15px groove;
+}
+
+.borde-cresta {
+  border: 15px ridge;
+}
+
+.borde-recuadro-interior {
+  border: 15px inset;
+}
+
+
+.borde-recuadro-exterior {
+  border: 15px outset;
+}
+
+.borde-mezcla {
+  /* Indica el tipo de borde por cada lado, igual que las medidas */
+  border-style: dotted solid dashed double;
+  border-color: lime turquoise gold hotpink;
+}
+
+.sin-borde-oculto {
+  border: none;
+  border: hidden;
+}
+
+/* Anchura Bordes */
+.borde-anchos {
+  border-style: solid;
+  border-width: 15px 10px 5px 1px;
+  /*border-width: thin;
+  border-width: medium;
+  border-width: thick;*/
+}
+
+/* Redondeo de Bordes */
+.borde-solido-redondeado {
+  border: 10px solid red;
+  border-radius: 15px; /* Cuanto más valor más redondeado */
+}
+
+.borde-solido-redondeado-por-esquina {
+  border: 10px solid purple;
+  border-radius: 20px 0px 10px 0px; /* Para redondear solo algunas esquinas */
+}

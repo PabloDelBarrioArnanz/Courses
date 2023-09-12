@@ -1,0 +1,41 @@
+
+
+div.person-title {
+    display: flex;
+    flex-direction: row;
+    padding-left: 10px;
+}
+
+div.person-title p {
+    padding-left: 5px;
+}
+
+div.person {
+    position: relative;
+    margin-right: 40px;
+}
+
+div.person img {
+    border-radius: 9px;
+}
+
+div.person p {
+    padding-left: 8px;
+    margin-bottom: 1px;
+    margin-top: 1px;
+}
+
+div.person-title img {
+    width: 20px;
+    height: 20px;
+}
+
+div.badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    background-color: white;
+    padding: 5px 7px;
+    border-radius: 2px;
+    font-weight: bold;
+}

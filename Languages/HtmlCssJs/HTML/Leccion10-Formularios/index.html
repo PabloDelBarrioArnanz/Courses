@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="css/estilos.css" rel="stylesheet"/>
+
+    <title>Formularios en HTML</title>
+</head>
+
+<body>
+
+    <h1>Formularios en HTML</h1>
+
+    <!-- Por defecto los formulario hace un get con los queryParams con el nombre que les has dado.-->
+    <form method="POST" action="urlBackend" target="_self" autocomplete="off"> <!-- Etiqueta para crear un formulario, no tiene representación gráfica, method="POST" cambia a tipo POST, se puede poner novalidate como atributo y se salta las validaciones especificadas después -->
+        
+        <fieldset > <!-- fieldset para meter en un marco el formulario, solo es visual -->
+            <legend>Datos Personales</legend> <!-- Poner un nombre al marco -->
+
+            <label for="nombre">Nombre: </label> <!-- Etiqueta para darle nombre a los campos del formulario con for la viculamos al campo que queremos -->
+            <input id="nombre" type="text" name="nombre" value="default value"/> <!-- Etiqueta para recoger texto de un formulario el atributo name es nombre del queryParam que tendrá -->
+            
+            </br>
+
+            <label for="apellido">Apellido: </label>
+            <input id="apellido" type="text" name="apellido" placeholder="Introduce tu apellido" required="true"/> <!-- Parececido a default value pero se queda medio transparente, required no te deja continuar sin contenido en ese campo -->
+
+            </br>
+
+            <label for="contraseña">Contraseña: </label>
+            <input id="apellido" type="password" name="contraseña" placeholder="Introduce tu contraseña" required="true"/>
+
+            </br>
+
+            <label for="mail">Email: </label>
+            <input id="mail" type="email" name="mail" placeholder="Introduce tu Email" required="true"/> <!-- valida que sea una dirección de correo-->
+
+            </br>
+
+            <label for="edad">Edad: </label>
+            <input id="edad" type="number" min="16" max="150" name="edad" placeholder="Introduce tu edad"/> <!-- solo deja introducir números y puedes poner min y max -->
+
+            </br>
+
+            <label for="altura">Altura: </label>
+            <input id="altura" type="number" min="45" max="270" step="any" name="altura" placeholder="Introduce tu altura"/> <!-- solo deja introducir números y puedes poner min y max -->
+
+            </br>
+
+            <!-- En un radio button si ponemos el mismo nombre para todos los valores solo permitimos 1 opción -->
+            <label>Genero: </label></br>
+            <input type="radio" id="femenino" name="genero" value="femenino"/>
+            <label for="fememino">Fememino</label></br>
+            <input type="radio" id="masculino" name="genero" value="masculino"/>
+            <label for="masculino">Masculino</label></br>
+            <input type="radio" id="otro" name="genero" value="otro"/>
+            <label for="otro">Otro</label></br>
+
+            </br>
+
+            <label>Gustos: </label></br>
+            <input type="radio" id="musica" name="musica" value="musica"/>
+            <label for="musica">Música</label></br>
+            <input type="radio" id="cine" name="cine" value="cine"/>
+            <label for="cine">Cine</label></br>
+            <input type="radio" id="deporte" name="deporte" value="deporte"/>
+            <label for="deporte">Deporte</label></br>
+            
+            </br>
+
+            <!-- Por lo general si hay varias posibles opciones se usa checkbox y para 1 sola radiobutton  -->
+            <label>Gustos Musicales: </label></br>
+            <input type="checkbox" id="rock" name="rock" value="rock"/>
+            <label for="rock">Rock</label></br>
+            <input type="checkbox" id="pop" name="pop" value="pop"/>
+            <label for="pop">Pop</label></br>
+            <input type="checkbox" id="rap" name="rap" value="rap"/>
+            <label for="rap">Rap</label></br>
+
+            </br>
+
+            <!-- select para respuestas predefinidas -->
+            <label  for="autos">Marca de Auto favorita:</label></br>
+            <select id="autos" name="autos">
+                <option value="volvo">Volvo</option>
+                <option value="bmw">BMW</option>
+                <option value="audi" selected="true">Audi</option> <!-- selected para predeterminado si no primero -->
+                <option value="mercedes">Mercedes</option>
+            </select></br>
+
+            </br>
+
+            <label  for="autos">Marca de Auto favorita varias seleciones:</label></br>
+            <select id="autos" name="autos" multiple="true">
+                <option value="volvo">Volvo</option>
+                <option value="bmw">BMW</option>
+                <option value="audi" selected="true">Audi</option> <!-- selected para predeterminado si no primero -->
+                <option value="mercedes">Mercedes</option>
+            </select></br>
+
+            <!-- Textarea para texto libre -->
+            <label for="comentario">Comentario:</label></br>
+            <textarea id="comentario" name="comentario" rows="2" cols="30">Comentario</textarea></br>
+
+            </br>
+
+            <label for="idPersona">Persona: </label>
+            <input id="idPersona" type="text" name="idPersona" value="Usuario 175" readonly="true" disabled="true"/></br> <!--Campo no editable el disable es opcional, hace que visualmente no parezca editable y no se envía al servidor -->
+
+            </br>
+
+            <input type="hidden" id="sistema" name="sistema" value="formularioPersona"> <!-- Campo no visible para enviar -->
+
+            </br>
+
+            <input id="submit" type="submit" value="Enviar"/> <!-- Etiqueta para crear un boton de submit -->
+            <input id="submit" type="submit" formnovalidate="formnovalidate" value="Enviar sin validar"/> <!-- Lo mismo que el otro pero con información no validada -->
+            <input id="reset" type="reset" value="Resetear el formulario"/> <!-- Lo mismo que el otro pero con información no validada -->
+        
+        </fieldset>
+
+    </form>
+
+</body>
+
+</html>
