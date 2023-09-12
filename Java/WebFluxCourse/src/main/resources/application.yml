@@ -1,9 +1,0 @@
-
-spring:
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/productsBD
-
-logging:
-  pattern:
-    console: '%d{"yyyy/MM/dd HH:mm:ss,SSS"} %highlight([%p]) %green([%t]) %yellow(%M\(%F:%L\)) - %msg%n'

@@ -17,3 +17,8 @@ out/
 *.iml
 .idea/
 **.DS_Store
+
+.mvn/
+mvnw
+mvnw.cmd
+node_modules/
