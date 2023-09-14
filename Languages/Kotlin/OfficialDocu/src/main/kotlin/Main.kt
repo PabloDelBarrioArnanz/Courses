@@ -20,6 +20,19 @@ fun main(args: Array<String>) {
     var unInicialized: String // Only var can be unInitialized but needs the type
     unInicialized = "test"
 
+    // Type checks and cast
+    val myVal: Any = ""
+    myVal is String
+    myVal !is String
+
+    //Smart cast
+    if (myVal is String) {
+        // here I can use myVal as string
+        myVal.length
+    }
+    if (myVal is String && myVal.length == 0) return
+    if (myVal !is String || myVal.length == 0) return
+
     // String templates
     val name = "Pablo"
     val myTemplate = "Hello $name"
@@ -192,7 +205,238 @@ fun main(args: Array<String>) {
     println({ string: String -> string.uppercase() }("hello")) // Invoke separately
 
 
-    // Classes
+    //todo returns and jumps
 
+    // Exceptions
+    /*
+        Kotlin has no checked exceptions -> checked exceptions are an error
+            Effective Java, 3rd Edition, Item 77: Don't ignore exceptions.
+            Java's checked exceptions were a mistake (Rod Waldhoff)
+    */
+    try {
+        throw Exception("Hi There!")
+    } catch (e: Exception) {
+        println("An exception was thrown " + e.message)
+    } finally {
+        // optional finally block always executed
+    }
+
+    // In kotlin try/catch block in an expression
+    val input = "6578"
+    val a: Int? = try { input.toInt() } catch (e: NumberFormatException) { null }
 
 }
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Classes
+// If class hasn't properties () are not necessary
+// If class hasn't body {} are not necessary
+// Parameters in first line are the first constructor, constructor keyword can be omitted if not annotations or modifiers
+class PrivateContact private constructor(
+    val id: Int = -1,
+    val email: String
+) {
+    var myField1: String = ""
+        get() = field
+        set(value) {
+            field = value
+        }
+
+    val myField2 get() = ""
+
+    var myField3: Any? = null
+    // @Inject set
+}
+
+class Contact(// properties with no val o var aren't accessible after instance created
+    val id: Int = -1,
+    val email: String
+) {
+    var category: String = ""
+
+    constructor(id: Int) : this(id, "none") { // Secondary constructor
+        this.category = "auto"
+    }
+
+    init {
+        category = "Some category" // init blocks are executed after constructor, can be more than one or 0
+    }
+
+    // Member functions
+    fun printId() {
+        println("My id is $id")
+    }
+}
+
+// Instantiating a class
+val myContact = Contact(22435, "pablo@gmail.com")
+// myContact.id
+// myContact.email
+// myContact.category
+// myContact.printId()
+
+// Data Classes
+// Are particularly useful for storing data
+// This kind of classes comes with other useful member functions
+// method print toString(), compare equals or == , copy copy()...
+data class User(val name: String, val id: Int)
+
+// Copy can change values
+val user = User("pablo", 324)
+val copiedValue = user.copy(name = "Pablo2")
+
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Inheritance
+open class OpenBase(p: Int) { // Only open class or functions can be used for inheritance
+    open val test1: String = "father"
+    open var test2: String = "father"
+
+    open fun printSomething() {
+        println("Hola")
+    }
+}
+
+class Example1(p: Int, x: String) : OpenBase(p) {} // Send super parameters directly
+class Example2 : OpenBase {
+    override var test1: String = "child" // Override a property changing it from val to var but can be done reversed
+    override var test2: String = "child"
+
+    constructor(p: Int, x: String) : super(p) {
+        // can do something here
+    }
+
+    override fun printSomething() { // If we use final override a child couldn't override it
+        // super.printSomething() super can be called
+        println("Hola")
+    }
+}
+
+// Inheritance order OpenBase constructor > OpenBase init > Child constructor > Child init
+
+open class Rectangle {
+    open fun draw() { /* ... */
+    }
+}
+
+interface Polygon {
+    fun draw() { /* ... */
+    } // interface members are 'open' by default
+}
+
+class Square() : Rectangle(), Polygon { // extends Rectangle and implements Polygon
+    // The compiler requires draw() to be overridden:
+    override fun draw() {
+        super<Rectangle>.draw() // call to Rectangle.draw()
+        super<Polygon>.draw() // call to Polygon.draw()
+    }
+}
+
+class FilledRectangle : Rectangle() {
+    override fun draw() {
+        val filler = Filler()
+        filler.drawAndFill()
+    }
+
+    inner class Filler {
+        fun fill() {
+            println("Filling")
+        }
+
+        fun drawAndFill() {
+            draw() // // Calls FilledRectangle's implementation of draw()
+            super@FilledRectangle.draw() // Calls Rectangle's implementation of draw()
+            fill()
+        }
+    }
+}
+
+// Compile-time constants
+// It must be a top level property or an object member
+// Must be initialized with primitive types or String
+// Can't have customer getter
+const val CONST_PROPERTY: String = ""
+
+// lateinit only applies for var
+class MyTest {
+    lateinit var subject: String // we can use isInitialized to check if it's already initialized
+
+    fun setup() {
+        subject = ""
+    }
+}
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Interfaces
+
+interface MyInterface {
+    val prop1: Int
+    var prop2: Int
+
+    fun function1()
+    fun function2() {
+        println("From interface")
+    }
+}
+
+
+interface MyInterfaceChild : MyInterface {
+    fun iAmTheChild()
+}
+
+class Implementer : MyInterfaceChild {
+    override val prop1: Int = 5
+    override var prop2: Int = 5 // As in inheritance classes a var property can be overridden as var or val but not in the other way
+
+    override fun function1() { // this function is required to be implemented
+        println("Required")
+    }
+
+    override fun function2() {
+        super.function2()
+        println("No required")
+    }
+
+    override fun iAmTheChild() {
+        println("Required")
+    }
+}
+
+// If we have conflict in overriding name functions we can use super<ClassName>.method()
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Functional Interfaces SAM Single Abstract Method interface
+
+fun interface MySAM {
+    fun accept(number: Int): Int
+}
+
+class ExampleClass1 {
+    val mySamMultplier: MySAM = MySAM { it * 3 }
+
+    val myValue = mySamMultplier.accept(4) // 12
+}
+
+class ExampleClass2 {
+    val myValue = object : MySAM {
+        override fun accept(number: Int): Int {
+            return 3 * number
+        }
+    }
+}
+
+// TypeAlias
+// Type aliases are names for existing types they don't create new types and SAM yes
+// SAM can have other members like non-abstract methods
+// SAM are syntactically and at runtime costly bcs need conversions
+typealias MyTypeAlias = (number: Int) -> Int
+val myTypeAliasMultiplier: MyTypeAlias = { it * 3 } // myTypeAliasMultiplier (Int) -> Int
+val noTypeAliasMultiplier: (number: Int) -> Int = { it * 3 } // myTypeAliasMultiplier (Int) -> Int
+val myValueTypeAlias = myTypeAliasMultiplier(4) // 12
+val noValueTypeAlias = noTypeAliasMultiplier(4) // 12
+
+// How to choose between SAMs and TypeAliases
+// If your API needs to accept a function (with parameters and return value) -> typealias to give it a shorten name
+// If your API needs to accept a more complex entity than a function -> separate it to an interface
