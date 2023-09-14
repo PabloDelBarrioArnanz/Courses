@@ -205,7 +205,35 @@ fun main(args: Array<String>) {
     println({ string: String -> string.uppercase() }("hello")) // Invoke separately
 
 
-    //todo returns and jumps
+    // Returns and jumps
+    val s = Exception("Hi There!").message ?: return
+
+    // labels
+    myLoop@ for (i in 1..100) {
+        myLoopOther@ for (j in 1..100) {
+            if (j == 5) break@myLoop // we can select witch loop break or continue
+        }
+    }
+
+    // labels also can be used to return at these point
+    fun foo1() {
+        listOf(1, 2, 3, 4, 5).forEach {
+            if (it == 3) return // non-local return directly to the caller of foo()
+            print(it)
+        }
+        println("this point is unreachable")
+    }
+
+    fun foo2() {
+        listOf(1, 2, 3, 4, 5).forEach lit@{
+            if (it == 3) return@lit // local return to the caller of the lambda - the forEach loop also we can use implicit name return@foreach
+            print(it)
+        }
+        print(" done with explicit label")
+    }
+
+    // return@a 1 this means return 1 at label @a
+
 
     // Exceptions
     /*
@@ -223,7 +251,11 @@ fun main(args: Array<String>) {
 
     // In kotlin try/catch block in an expression
     val input = "6578"
-    val a: Int? = try { input.toInt() } catch (e: NumberFormatException) { null }
+    val a: Int? = try {
+        input.toInt()
+    } catch (e: NumberFormatException) {
+        null
+    }
 
 }
 
@@ -279,12 +311,28 @@ val myContact = Contact(22435, "pablo@gmail.com")
 // Data Classes
 // Are particularly useful for storing data
 // This kind of classes comes with other useful member functions
-// method print toString(), compare equals or == , copy copy()...
+// method print toString(), compare equals or == , copy copy(), componentN()
+// Data classes cannot be abstract, open, sealed, or inner
+// All parameters must be val or var and at least 1
+// Some times are better option than Pair or Triple
 data class User(val name: String, val id: Int)
 
 // Copy can change values
 val user = User("pablo", 324)
 val copiedValue = user.copy(name = "Pablo2")
+
+// Compiler only use properties in the constuctor to build the equals and hashcode
+// Then in this case 2 person with same name and different age are equal
+data class Person(val name: String) {
+    var age: Int = 0
+}
+
+// Works by order no by name
+fun destructuring() {
+    val (destructuredName, destructuredId) = User("pablo", 324)
+    val (otherId) = User("pablo", 324) // otherId = pablo
+    val (_, onlyNameNeed) = User("pablo", 324) // as works in other we need to avoid some parameters
+}
 
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -388,7 +436,8 @@ interface MyInterfaceChild : MyInterface {
 
 class Implementer : MyInterfaceChild {
     override val prop1: Int = 5
-    override var prop2: Int = 5 // As in inheritance classes a var property can be overridden as var or val but not in the other way
+    override var prop2: Int =
+        5 // As in inheritance classes a var property can be overridden as var or val but not in the other way
 
     override fun function1() { // this function is required to be implemented
         println("Required")
@@ -432,6 +481,7 @@ class ExampleClass2 {
 // SAM can have other members like non-abstract methods
 // SAM are syntactically and at runtime costly bcs need conversions
 typealias MyTypeAlias = (number: Int) -> Int
+
 val myTypeAliasMultiplier: MyTypeAlias = { it * 3 } // myTypeAliasMultiplier (Int) -> Int
 val noTypeAliasMultiplier: (number: Int) -> Int = { it * 3 } // myTypeAliasMultiplier (Int) -> Int
 val myValueTypeAlias = myTypeAliasMultiplier(4) // 12
@@ -440,3 +490,71 @@ val noValueTypeAlias = noTypeAliasMultiplier(4) // 12
 // How to choose between SAMs and TypeAliases
 // If your API needs to accept a function (with parameters and return value) -> typealias to give it a shorten name
 // If your API needs to accept a more complex entity than a function -> separate it to an interface
+
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Visibility
+// Kotlin has 4 modifiers public, private, protected and internal
+// By default is public, it's similar to java an internal it's visible everywhere in the same module
+// protected or internal when are overridden has the same visibility if not specified
+
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Extensions
+// Kotlin provides the ability to extend a class or an interface with new functionality
+// Are resolved statically
+// If extension it's defined as top level his scope is the package, but can be imported
+// If extension it's defined for a class inside another class, only has effect in that class
+// Extension can be overridden if are declared as open
+fun MutableList<Int>.swap(index1: Int, index2: Int) {
+    val tmp = this[index1] // 'this' corresponds to the list
+    this[index1] = this[index2]
+    this[index2] = tmp
+}
+
+val list = mutableListOf(1, 2, 3).swap(0, 2)
+
+// If a member and function has the same sign member wins
+class Example {
+    fun printFunctionType() { println("Class method") }
+}
+
+fun Example.printFunctionType() { println("Extension function") }
+
+val nothing = Example().printFunctionType() // "Class method"
+
+// Nullable
+fun Int?.myToString(): String {
+    return this?.toString() ?: "No value found"
+}
+fun printNumber() {
+    val num1: Int = 4
+    // num2.myToString()
+    var num2: Int? = 4
+    num2.myToString()
+}
+
+// Also we can extend properties
+val <T> List<T>.lastIndex: Int
+    get() = size - 1
+
+// val House.number = 1 error: initializers are not allowed for extension properties
+
+// Companion alsa can be extended
+class MyClass {
+    companion object {
+
+    }  // will be called "Companion"
+}
+
+fun MyClass.Companion.printCompanion() { println("companion") }
+
+fun main() {
+    MyClass.printCompanion()
+}
+
+
+// Sealed Classes and Interfaces
+//
+sealed interface Error
+sealed class MyError: Error
