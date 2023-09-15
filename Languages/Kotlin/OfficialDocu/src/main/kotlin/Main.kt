@@ -1,4 +1,6 @@
 import java.util.*
+import java.util.function.BinaryOperator
+import java.util.function.IntBinaryOperator
 
 fun main(args: Array<String>) {
     println("Official Docu research")
@@ -80,7 +82,7 @@ fun main(args: Array<String>) {
         "2" -> println("Two")
         else -> println("Unknown")
     }
-    val text = when (result) { // if we use when as expression else is mandatory
+    val text = when (result) { // if we use when as expression else is mandatory except if all case are cover
         "1" -> "One"
         "2" -> "Two"
         else -> println("Unknown")
@@ -516,10 +518,14 @@ val list = mutableListOf(1, 2, 3).swap(0, 2)
 
 // If a member and function has the same sign member wins
 class Example {
-    fun printFunctionType() { println("Class method") }
+    fun printFunctionType() {
+        println("Class method")
+    }
 }
 
-fun Example.printFunctionType() { println("Extension function") }
+fun Example.printFunctionType() {
+    println("Extension function")
+}
 
 val nothing = Example().printFunctionType() // "Class method"
 
@@ -527,6 +533,7 @@ val nothing = Example().printFunctionType() // "Class method"
 fun Int?.myToString(): String {
     return this?.toString() ?: "No value found"
 }
+
 fun printNumber() {
     val num1: Int = 4
     // num2.myToString()
@@ -547,7 +554,9 @@ class MyClass {
     }  // will be called "Companion"
 }
 
-fun MyClass.Companion.printCompanion() { println("companion") }
+fun MyClass.Companion.printCompanion() {
+    println("companion")
+}
 
 fun main() {
     MyClass.printCompanion()
@@ -555,6 +564,294 @@ fun main() {
 
 
 // Sealed Classes and Interfaces
-//
-sealed interface Error
-sealed class MyError: Error
+// A sealed class is abstract and his constructor are protected (by default) or private
+// Represents restricted class hierarchy. All subclasses of a sealed class are known in compile time
+// Third-party clients can't extend a sealed class
+// In some sense, sealed classes are similar to enum
+//  The set  of values in an enum type is also restricted
+//  But each enum constant exists only as a single instance.
+//  A subclass of a sealed class can have multiple instances
+// Enum can implement a sealed interface but not extend a sealed class
+
+sealed interface Error // has implementations only in same package and module
+sealed class IOError : Error // extended only in same package and module
+open class CustomError : Error // can be extended wherever it's visible
+
+fun log(e: Error) = when (e) {
+    is IOError -> {
+        println("Error while reading file")
+    }
+
+    is CustomError -> {
+        println("Custom error")
+    }
+    // the `else` clause is not required because all the cases are covered
+}
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Generic In/Out/Where
+class Box<T>(t: T)
+
+val box1: Box<Int> = Box<Int>(1)
+val box2 = Box(1)
+
+// Variance
+// Kotlin has no wildcard, but why Java does?
+// Java uses wildcards to increase flexibility
+// Bcs java type are invariant, so List<String> is not a subtype from List<Object>
+// This is to avoid this code compiles and broke in runtime
+
+/*
+    List<String> strs = new ArrayList<String>();
+    List<Object> objs = strs; // !!! A compile-time error here saves us from a runtime exception later.
+
+*/
+
+// Se another example
+// If java addAll method signature would be like this
+//     void addAll(Collection<E> items)
+
+// Then you wouldn't can do this bcs Collection<String> is not a subtype from Collection<Object>, Do not confuse with add an item, this is list type not item type
+/*
+      void copyAll(Collection<Object> to, Collection<String> from) {
+            to.addAll(from);
+      }
+*/
+// The actual signature of addAll is
+/*
+     interface Collection<E> ... {
+        void addAll(Collection<? extends E> items); // The wildcard type argument ? extends E indicates that this method accepts a collection of objects of E or a subtype of E, not just E itself
+     }
+*/
+// Collection<String> is a subtype of Collection<? extends Object>.
+// In other words, the wildcard with an extends-bound (upper bound) makes the type covariant.
+
+// Other mechanism super
+// If we have a list of string and get make a get we can read it as an object
+// In the same way with the list if we want to put an object in the list we need
+// List<? super String> read as strings or any of its supertypes
+// This is called contravariance
+
+// Summary
+// Ihe wildcard with an extends-bound (upper bound) makes the type covariant List<? extends E>
+// Ihe wildcard with a super-bound (bottom bound) makes the type contravariance List<? super E>
+
+// In kotlin there is a way to make this List<? extends E> in a simple way with no adding complex
+// Declaration-site playground.variance
+class Source<out T>(val t: T) {
+    // <? extends T>
+    fun nextT(): T { // producer
+        return t
+    }
+}
+
+val s1 = Source(1)
+val s2: Source<Any> = s1
+// The out modifier is called a playground.variance annotation it provides declaration-site playground.variance
+// In contrast with Java's use-site playground.variance where wildcards in the type usages make the types covariant
+// In other words, you can say that the class C is covariant in the parameter T, or that T is a covariant type parameter
+// You can think of Source as being a producer of T's, and NOT a consumer of T's.
+
+
+// Also exists in annotation, witch makes a type parameter contravariant (can only be consumed and never produced)
+interface Comparable<in T> {
+    operator fun compareTo(other: T): Int // consumer
+}
+
+fun demo(x: Comparable<Number>) {
+    x.compareTo(1.0) // 1.0 has type Double, which is a subtype of Number
+    // Thus, you can assign x to a variable of type Comparable<Double>
+    val y: Comparable<Double> = x // OK!
+}
+
+// Type projections Use-site playground.variance
+fun copy(from: Array<out Any>, to: Array<Any>) { // Array<? extends String>
+}
+
+val ints: Array<Int> = arrayOf(1, 2, 3)
+val any = Array<Any>(3) { "" }
+val copyValue = copy(ints, any)
+
+fun fill(dest: Array<in String>, value: String) { // Array<? super String>
+
+}
+
+val dest1: Array<String> = arrayOf("")
+val dest2: Array<Any> = arrayOf()
+
+val fillValue1 = fill(dest1, "")
+val fillValue2 = fill(dest2, "")
+
+// Star-projections
+// Function<*, String> means Function<in Nothing, String>.
+// Function<Int, *> means Function<Int, out Any?>.
+// Function<*, *> means Function<in Nothing, out Any?>
+
+// Also generic function can be used as extensions
+fun <T> T.basicToString(): String { // extension function
+    return ""
+}
+
+val basicString = Source(1).basicToString()
+
+// Upper bounds if not specified is Any?
+fun <T : Comparable<T>> sort(list: List<T>) {} // Any type witch implements Comparable
+//val fail = sort(listOf(HashMap<Int, String>())) // Error: HashMap<Int, String> is not a subtype of Comparable<HashMap<Int, String>>
+
+
+// If you need to define more than one restriction you can use where
+// T type must implement both CharSequence and Comparable
+fun <T> copyWhenGreater(list: List<T>, threshold: T): List<String>
+        where T : CharSequence,
+              T : Comparable<T> {
+    return list.filter { it > threshold }.map { it.toString() }
+}
+
+// Type erasure
+val mutableList = mutableListOf("")
+val result = if (mutableList is List<*>) {
+    mutableList.forEach { println(it) } // The items are typed as `Any?`
+} else null
+fun handleStrings(list: MutableList<String>) {
+    if (list is ArrayList) {
+        // `list` is smart-cast to `ArrayList<String>`
+    }
+}
+
+// uncheck cast
+fun readDictionary(file: String): Map<String, *> = mutableMapOf("" to "")
+
+// Warning: Unchecked cast: `Map<String, *>` to `Map<String, Int>`
+val intsDictionary: Map<String, Int> = readDictionary("ints.dictionary") as Map<String, Int>
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class BaseClass {
+
+    private val one = 1
+
+    class MyNestedClass {
+        fun sum(first: Int, second: Int): Int {
+            return first + second // + one no puede acceder a atributos privados
+        }
+    }
+
+    inner class MyInnerClass {
+        fun sumOne(number: Int): Int {
+            return number + one // Como es inner class si puede accerder aunque se privado
+        }
+    }
+}
+
+
+// En java si declaramos la clase interior como static sería nested y si no inner pocas veces se usan inner
+
+/*
+    public class MyClasses {
+        private final String name = "pablo";
+
+        public static class JavaNestedClass {
+            public static void printSomething() {
+                System.out.println("Hola "); // No puede acceder a name
+            }
+        }
+        public class JavaInnerClass {
+            public void printSomething() {
+                System.out.println("Hola " + name);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        MyClasses my = new MyClasses();
+
+        //new MyClasses.JavaNestedClass().printSomething();
+        MyClasses.JavaNestedClass.printSomething();
+
+
+        MyClasses.JavaInnerClass innerClass = my.new JavaInnerClass();
+        innerClass.printSomething();
+    }
+*/
+fun nested() {
+
+    val myNestedClass = BaseClass.MyNestedClass()
+    val nestedSum = myNestedClass.sum(10, 5)
+    println(nestedSum)
+
+    val myInnerClass = BaseClass().MyInnerClass() // en este caso hay que crear la clase base
+    val innerSum = myInnerClass.sumOne(6)
+    println(innerSum)
+}
+
+// Anonymous inner class instances are created using an object expression:
+/*
+    window.addMouseListener(object : MouseAdapter() {
+
+        override fun mouseClicked(e: MouseEvent) { ... }
+
+        override fun mouseEntered(e: MouseEvent) { ... }
+    })
+*/
+
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Enum classes
+enum class Direction {
+    NORTH, SOUTH, WEST, EAST
+}
+
+enum class Color(val rgb: Int) {
+    RED(0xFF0000),
+    GREEN(0x00FF00),
+    BLUE(0x0000FF)
+}
+
+enum class Greet {
+    HELLO {
+        override fun greetings(name: String) = "Hello $name"
+    },
+    BYE {
+        override fun greetings(name: String) = "BYE $name"
+    };
+
+    abstract fun greetings(name: String): String
+}
+
+val hello = Greet.HELLO.greetings("Pablo")
+
+// An enum also can implement interfaces
+// In this case it's implementing 2 interface, BinaryOperator apply function and IntBinaryOperator applyAsInt function
+enum class IntArithmetics : BinaryOperator<Int>, IntBinaryOperator {
+    PLUS {
+        override fun apply(t: Int, u: Int): Int = t + u
+    },
+    TIMES {
+        override fun apply(t: Int, u: Int): Int = t * u
+    };
+
+    // As we need to implement both interfaces we can say applyAsInt will be implemented as apply now both interfaces uses apply
+    override fun applyAsInt(t: Int, u: Int) = apply(t, u)
+}
+
+val plus2 = IntArithmetics.PLUS.apply(1, 2)
+
+// EnumClass.valueOf(value: String): EnumClass
+// EnumClass.values(): Array<EnumClass>
+
+fun printEnum() {
+    println(Direction.NORTH.name) // prints NORTH
+    println(Direction.NORTH.ordinal) // prints 0
+}
+
+// Inline value classes
+// Are simple wrappers
+// Can have init and secondary constructor but can't have backing fields and lateinit properties
+@JvmInline
+value class Password(private val s: String)
+
+// No actual instantiation of class 'Password' happens
+// At runtime 'securePassword' contains just 'String'
+val securePassword = Password("Don't try this in production")
