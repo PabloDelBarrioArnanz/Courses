@@ -798,6 +798,7 @@ fun nested() {
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
 // Enum classes
 enum class Direction {
     NORTH, SOUTH, WEST, EAST
@@ -848,10 +849,16 @@ fun printEnum() {
 
 // Inline value classes
 // Are simple wrappers
-// Can have init and secondary constructor but can't have backing fields and lateinit properties
+// Can have init and secondary constructor and are allowed to inherit and implement, but can't have backing fields and lateinit properties
 @JvmInline
 value class Password(private val s: String)
 
 // No actual instantiation of class 'Password' happens
 // At runtime 'securePassword' contains just 'String'
 val securePassword = Password("Don't try this in production")
+
+// Can be similar to typealias but with no wrapping
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Object expressions and declarations
