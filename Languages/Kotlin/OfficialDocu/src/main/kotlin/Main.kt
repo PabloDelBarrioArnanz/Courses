@@ -688,6 +688,8 @@ val fillValue2 = fill(dest2, "")
 // Function<Int, *> means Function<Int, out Any?>.
 // Function<*, *> means Function<in Nothing, out Any?>
 
+// Also can be used _ for automatically infer a type of the argument when other types are explicitly specified
+
 // Also generic function can be used as extensions
 fun <T> T.basicToString(): String { // extension function
     return ""
