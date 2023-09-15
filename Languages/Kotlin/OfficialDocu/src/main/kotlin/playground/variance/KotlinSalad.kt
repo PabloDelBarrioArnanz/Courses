@@ -29,7 +29,7 @@ fun salad() {
     addBananaToBananaOrBananaFather(arrayOf<KotlinFruit>(KotlinBanana()))
     addBananaToBananaOrBananaFather(arrayOf<KotlinBanana>(KotlinBanana()))
     addBananaToBananaOrBananaFather(arrayOf<KotlinFruit>(KotlinCherry()))
-    //addBananaToBananaOrBananaFather(arrayOf<KotlinCherry>(KotlinCherry())) Cherry is not a banana neither a banana child
+    //addBananaToBananaOrBananaFather(arrayOf<KotlinCherry>(KotlinCherry())) Cherry is not a banana neither a banana father
 
     addBananaToAnyFruitOrFruitArrayChild(arrayOf<KotlinFruit>(KotlinBanana()))
     addBananaToAnyFruitOrFruitArrayChild(arrayOf<KotlinBanana>(KotlinBanana()))
