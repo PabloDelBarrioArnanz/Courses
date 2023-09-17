@@ -1,6 +1,10 @@
 import java.util.*
 import java.util.function.BinaryOperator
 import java.util.function.IntBinaryOperator
+import kotlin.math.abs
+import kotlin.math.cos
+import kotlin.properties.Delegates
+import kotlin.reflect.KProperty
 
 fun main(args: Array<String>) {
     println("Official Docu research")
@@ -110,7 +114,7 @@ fun main(args: Array<String>) {
 
     // Also exists while and doWhile
 
-    // Functions
+    // Functions Intro
     fun hello1() { // No return type -> Unit
         return println("Hello!") // Same as println("Hello!")
     }
@@ -482,6 +486,7 @@ class ExampleClass2 {
 // Type aliases are names for existing types they don't create new types and SAM yes
 // SAM can have other members like non-abstract methods
 // SAM are syntactically and at runtime costly bcs need conversions
+typealias Predicate<T> = (T) -> Boolean
 typealias MyTypeAlias = (number: Int) -> Int
 
 val myTypeAliasMultiplier: MyTypeAlias = { it * 3 } // myTypeAliasMultiplier (Int) -> Int
@@ -730,74 +735,7 @@ val intsDictionary: Map<String, Int> = readDictionary("ints.dictionary") as Map<
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class BaseClass {
-
-    private val one = 1
-
-    class MyNestedClass {
-        fun sum(first: Int, second: Int): Int {
-            return first + second // + one no puede acceder a atributos privados
-        }
-    }
-
-    inner class MyInnerClass {
-        fun sumOne(number: Int): Int {
-            return number + one // Como es inner class si puede accerder aunque se privado
-        }
-    }
-}
-
-
-// En java si declaramos la clase interior como static sería nested y si no inner pocas veces se usan inner
-
-/*
-    public class MyClasses {
-        private final String name = "pablo";
-
-        public static class JavaNestedClass {
-            public static void printSomething() {
-                System.out.println("Hola "); // No puede acceder a name
-            }
-        }
-        public class JavaInnerClass {
-            public void printSomething() {
-                System.out.println("Hola " + name);
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        MyClasses my = new MyClasses();
-
-        //new MyClasses.JavaNestedClass().printSomething();
-        MyClasses.JavaNestedClass.printSomething();
-
-
-        MyClasses.JavaInnerClass innerClass = my.new JavaInnerClass();
-        innerClass.printSomething();
-    }
-*/
-fun nested() {
-
-    val myNestedClass = BaseClass.MyNestedClass()
-    val nestedSum = myNestedClass.sum(10, 5)
-    println(nestedSum)
-
-    val myInnerClass = BaseClass().MyInnerClass() // en este caso hay que crear la clase base
-    val innerSum = myInnerClass.sumOne(6)
-    println(innerSum)
-}
-
-// Anonymous inner class instances are created using an object expression:
-/*
-    window.addMouseListener(object : MouseAdapter() {
-
-        override fun mouseClicked(e: MouseEvent) { ... }
-
-        override fun mouseEntered(e: MouseEvent) { ... }
-    })
-*/
-
+// Nested and inner (see MoureDev mid-tutorial)
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -967,6 +905,7 @@ class ClassWithCompanionNamed {
         fun create(): ClassWithCompanionNamed = ClassWithCompanionNamed()
     }
 }
+
 val instance = ClassWithCompanionNamed.create()
 
 class ClassWithCompanionNotNamed {
@@ -1012,13 +951,20 @@ interface Base {
 
 // Normal class implementing interface
 class BaseImpl(val x: Int) : Base {
-    override fun printMessage() { print(x) }
-    override fun printMessageLine() { println(x) }
+    override fun printMessage() {
+        print(x)
+    }
+
+    override fun printMessageLine() {
+        println(x)
+    }
 }
 
 // Class witch instance of inherit from BaseImpl derived it and can redefine or not any methods
 class Derived(b: Base) : Base by b {
-    override fun printMessage() { print("abc") }
+    override fun printMessage() {
+        print("abc")
+    }
 }
 
 fun tryIt() {
@@ -1040,3 +986,136 @@ class RectangleShape(val width: Int, val height: Int) : ClosedShape {
 class Window(private val bounds: ClosedShape) : ClosedShape by bounds
 
 // Delegated properties
+// Lazy properties: the value is computed only on first access
+// Observable properties: listeners are notified about changes to this property (observable pattern)
+// Storing properties in a map instead of a separate field for each property
+
+// Property delegator must have getValue and setValue operator methods
+class CustomerDelegate {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
+        return "$thisRef, thank you for delegating '${property.name}' to me!"
+    }
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+        println("$value has been assigned to '${property.name}' in $thisRef.")
+    }
+}
+
+class ExampleDelegatedProperties {
+    var delegated: String by CustomerDelegate()
+
+    // Implements a lambda with 3 parameters, the property, oldValue, newValue
+    var delegatedObservable: String by Delegates.observable("defaultValue") { prop, old, new ->
+        println("$old -> $new")
+    }
+}
+
+var topLevelInt: Int = 0
+
+class ClassWithDelegate(val anotherClassInt: Int)
+
+class ClassWithDelegation(var memberInt: Int, val anotherClassInstance: ClassWithDelegate) {
+    var delegatedToMember: Int by this::memberInt
+    var delegatedToTopLevel: Int by ::topLevelInt
+
+    val delegatedToAnotherClass: Int by anotherClassInstance::anotherClassInt
+}
+
+// Extends a class with a new property delegated
+var ClassWithDelegation.extDelegated: Int by ::topLevelInt
+
+// Storing properties in a map
+class UserDelegation(val map: Map<String, Any?>) {
+    val name: String by map
+    val age: Int by map
+}
+
+val userDelegation1 = UserDelegation(
+    mapOf(
+        "name" to "John Doe",
+        "age" to 25
+    )
+)
+val userDelegation2 = UserDelegation(
+    mapOf(
+        "userName" to "John Doe", // no matters key name bcs class delegates in some key with type string
+        "userAge" to 25
+    )
+)
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// TypeAliases (see MoureDev mid-tutorial)
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+// Functions (see Functions Intro in this file)
+
+fun funSum(num1: Int, num2: Int = num1): Int { // Default parameters
+    return num1 + num2
+}
+
+val resultFunSum = funSum(1, 2)
+val resultFunSumDefault = funSum(1)
+val namedFunSumDefault =
+    funSum(num1 = 1) // Sometimes named parameters are need to indicate witch parameter we are sending
+
+// If a HOI has the function parameter in the last position can be called with { }
+fun foo(
+    bar: Int = 0,
+    baz: Int = 1,
+    qux: () -> Unit,
+) {
+}
+
+val r1 = foo(1) { println("hello") }     // Uses the default value baz = 1
+val r2 = foo(qux = { println("hello") }) // Uses both default values bar = 0 and baz = 1
+val r3 = foo { println("hello") }        // Uses both default values bar = 0 and baz = 1
+
+
+// Single-expression functions
+fun singleExpressionDouble(x: Int) = x * 2
+
+// Infix notation
+// They must be member functions or extension functions
+// They must have a single parameter
+// The parameter must not accept variable number of arguments and must have no default value
+
+infix fun Int.infixFunction(x: Int): Int = x + this
+
+val infixResult = 1 infixFunction 2
+
+// Be careful has lower precedence than arithmetic operators
+// 1 infixResult 2 + 3 is equivalent to 1 infixResult (2 + 3)
+
+// But has higher precedence than boolean operators
+// a && b xor c is equivalent to a && (b xor c)
+//a xor b in c is equivalent to (a xor b) in c
+
+class MyStringCollection {
+    infix fun add(s: String) { /*...*/ }
+
+    fun build() {
+        this add "abc"   // Correct
+        add("abc")       // Correct
+        //add "abc"        // Incorrect: the receiver must be specified
+    }
+}
+
+// Kotlin supports local functions
+fun parentFunction(number: Int) {
+    fun childFunction() {
+
+    }
+    childFunction()
+}
+// Tail Recursive functions
+val eps = 1E-10
+
+// tailrec the compiler optimizes out the recursion
+tailrec fun findFixPoint(x: Double = 1.0): Double =
+    if (abs(x - cos(x)) < eps) x else findFixPoint(cos(x))
+
+
+// Lambdas
