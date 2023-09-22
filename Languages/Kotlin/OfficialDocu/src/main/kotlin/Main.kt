@@ -1094,7 +1094,8 @@ val infixResult = 1 infixFunction 2
 //a xor b in c is equivalent to (a xor b) in c
 
 class MyStringCollection {
-    infix fun add(s: String) { /*...*/ }
+    infix fun add(s: String) { /*...*/
+    }
 
     fun build() {
         this add "abc"   // Correct
@@ -1110,6 +1111,7 @@ fun parentFunction(number: Int) {
     }
     childFunction()
 }
+
 // Tail Recursive functions
 val eps = 1E-10
 
@@ -1119,3 +1121,65 @@ tailrec fun findFixPoint(x: Double = 1.0): Double =
 
 
 // Lambdas
+// Fast example pretty similar to java
+fun <T, R> Collection<T>.fold(initial: R, combine: (acc: R, next: T) -> R): R {
+    var accumulator: R = initial
+    for (element: T in this) {
+        accumulator = combine(accumulator, element)
+    }
+    return accumulator
+}
+
+val myAcc = listOf("1", "2", "3").fold(0) { acc, next ->
+    next.toInt() + acc
+}
+
+// Callable reference
+val getListSizeV1: (List<String>) -> Boolean = { list -> list.isEmpty() }
+val getListSizeV2: (List<String>) -> Boolean = { it.isEmpty() }
+val getListSizeV3: (List<String>) -> Boolean = List<String>::isEmpty
+
+// Return value from lambda
+val filter1 = listOf(1, 2, 3).filter {
+    val shouldPass = it > 0
+    shouldPass
+}
+
+val filter2 = listOf(1, 2, 3).filter {
+    val shouldPass = it > 0
+    return@filter shouldPass
+}
+
+// Destructuring lambda and ignore
+val map = mapOf(1 to "1", 2 to "2").forEach { (_, value) -> println(value) }
+
+// Closure
+fun sum(ints: List<Int>) {
+    var sum = 0
+    ints.filter { it > 0 }
+        .forEach {
+            sum += it // In java cannot access to this val bcs must be final or effective final
+        }
+    print(sum)
+}
+
+// Todo check this
+// Function literal with receiver
+// A.(B) -> C can be instantiated with a special form of function literals – function literals with receiver
+val sum = 1
+val sum1: Int.(Int) -> Int = { other -> plus(other) }
+val sum2: Int.(Int) -> Int = fun Int.(other: Int): Int = this + other
+
+class HTML {
+    fun body() {}
+}
+
+fun html(init: HTML.() -> Unit): HTML {
+    val html = HTML()
+    html.init()
+    return html
+}
+
+val myHtml = html {
+    body()
+}
