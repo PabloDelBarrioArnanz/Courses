@@ -1163,9 +1163,9 @@ fun sum(ints: List<Int>) {
     print(sum)
 }
 
-// Todo check this
 // Function literal with receiver
 // A.(B) -> C can be instantiated with a special form of function literals – function literals with receiver
+// Inside the body of the function literal, the receiver object passed to a call becomes an implicit 'this
 val sum = 1
 val sum1: Int.(Int) -> Int = { other -> plus(other) }
 val sum2: Int.(Int) -> Int = fun Int.(other: Int): Int = this + other
@@ -1181,5 +1181,89 @@ fun html(init: HTML.() -> Unit): HTML {
 }
 
 val myHtml = html {
-    body()
+    body() // we can call body directly bcs we are like inside the receiver (HTML)
 }
+
+// This is used for type-safe builders
+
+
+// Inline functions
+// So, just to recap, when we’re passing a lambda to a function, the following happens under the hood:
+//   At least one instance of a special type is created and stored in the heap
+//   An extra method call will always happen
+// The extra memory allocations get even worse when a lambda captures a variable: The JVM creates a function type instance on every invocation
+
+// When using inline functions, the compiler inlines the function body. That is, it substitutes the body directly into places where the function gets called
+// When using inline functions, there is no extra object allocation and no extra virtual method calls.
+
+
+// Operator overloading
+// Kotlin allows you to provide custom implementations for the predefined set of operators on types like (like + or *)
+
+// +a  <=> a.unaryPlus()
+// -a  <=> a.unaryMinus()
+// !a  <=> a.not()
+// a++ <=> a.inc()
+// a-- <=> a.dec()
+// much more
+
+data class Point(val x: Int, val y: Int)
+
+operator fun Point.unaryMinus() = Point(-x, -y)
+
+val point = Point(10, 20)
+val minusPoint = -point
+
+
+// --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Builders
+// Type-safe builders allow creating Kotlin-based domain-specific languages (DSLs)
+/*
+    html {
+            head {
+                title {+"XML encoding with Kotlin"}
+            }
+            body {
+                h1 {+"XML encoding with Kotlin"}
+                p  {+"thi ...}
+            }
+         }
+*/
+data class Greeting(val default: String)
+data class PersonData(val age: Int, val greeting: Greeting)
+
+class PersonBuilder {
+    var age = 0
+    private val greetingBuilder = GreetingBuilder()
+
+    fun greeting(init: GreetingBuilder.() -> Unit) {
+        greetingBuilder.init()
+    }
+
+    fun build(): PersonData { return PersonData(age, greetingBuilder.build()) }
+}
+
+class GreetingBuilder {
+    var greeting = ""
+    fun build(): Greeting { return Greeting(greeting) }
+}
+
+fun buildPerson(init: PersonBuilder.() -> Unit): PersonData {
+    val builder = PersonBuilder()
+    builder.init()
+    return builder.build()
+}
+
+val myCreatedPerson = buildPerson {
+    age = 26 // Here it's like we are inside the person builder then we can access to his age property
+    greeting {
+        greeting = "Saludos!"
+    }
+}
+
+val myCreatedPerson2 = PersonData(26, Greeting("Saludos!"))
+
+// Scope control with @DslMarker
+// That way we can control for example in the html example to don't allow to create a head inside another head
+// TODO create a complete example
