@@ -11,7 +11,8 @@ import SwiftUI
 struct MoureDevYouTubeTutorialApp: App {
     var body: some Scene {
         WindowGroup {
-            ListView().environmentObject(ProgrammerModelData())
+            //ListView().environmentObject(ProgrammerModelData())
+            FaceIDView()
         }
     }
 }

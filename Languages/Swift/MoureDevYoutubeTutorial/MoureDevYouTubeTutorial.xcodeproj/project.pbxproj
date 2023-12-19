@@ -10,6 +10,10 @@
 		5B5799CF2B30BD3F007C23D0 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5799CE2B30BD3F007C23D0 /* StateView.swift */; };
 		5B5799D12B30BE73007C23D0 /* BindingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5799D02B30BE73007C23D0 /* BindingView.swift */; };
 		5B5799D32B30C34C007C23D0 /* EnvironmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5799D22B30C34C007C23D0 /* EnvironmentView.swift */; };
+		5B5799D52B31A7E0007C23D0 /* FaceIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5799D42B31A7E0007C23D0 /* FaceIDView.swift */; };
+		5B5799D72B31AD1E007C23D0 /* LinkWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5799D62B31AD1E007C23D0 /* LinkWebView.swift */; };
+		5B5799D92B31AECB007C23D0 /* WebKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5799D82B31AECB007C23D0 /* WebKitView.swift */; };
+		5B5799DD2B31B22A007C23D0 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5799DC2B31B22A007C23D0 /* SafariWebView.swift */; };
 		5BB15E282B24DB7C001F908C /* MoureDevYouTubeTutorialApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB15E272B24DB7C001F908C /* MoureDevYouTubeTutorialApp.swift */; };
 		5BB15E2A2B24DB7C001F908C /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB15E292B24DB7C001F908C /* StackView.swift */; };
 		5BB15E2C2B24DB7E001F908C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BB15E2B2B24DB7E001F908C /* Assets.xcassets */; };
@@ -47,6 +51,10 @@
 		5B5799CE2B30BD3F007C23D0 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
 		5B5799D02B30BE73007C23D0 /* BindingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingView.swift; sourceTree = "<group>"; };
 		5B5799D22B30C34C007C23D0 /* EnvironmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentView.swift; sourceTree = "<group>"; };
+		5B5799D42B31A7E0007C23D0 /* FaceIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FaceIDView.swift; path = MoureDevYouTubeTutorial/Views/FaceIDView.swift; sourceTree = SOURCE_ROOT; };
+		5B5799D62B31AD1E007C23D0 /* LinkWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LinkWebView.swift; path = MoureDevYouTubeTutorial/Views/LinkWebView.swift; sourceTree = SOURCE_ROOT; };
+		5B5799D82B31AECB007C23D0 /* WebKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebKitView.swift; path = MoureDevYouTubeTutorial/Views/WebKitView.swift; sourceTree = SOURCE_ROOT; };
+		5B5799DC2B31B22A007C23D0 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SafariWebView.swift; path = MoureDevYouTubeTutorial/Views/SafariWebView.swift; sourceTree = SOURCE_ROOT; };
 		5BB15E242B24DB7C001F908C /* MoureDevYouTubeTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoureDevYouTubeTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BB15E272B24DB7C001F908C /* MoureDevYouTubeTutorialApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoureDevYouTubeTutorialApp.swift; sourceTree = "<group>"; };
 		5BB15E292B24DB7C001F908C /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
@@ -125,9 +133,9 @@
 		5BB15E262B24DB7C001F908C /* MoureDevYouTubeTutorial */ = {
 			isa = PBXGroup;
 			children = (
-				5B5799CD2B30BD0C007C23D0 /* PropertyWrappers */,
 				5BB45E332B30755E00E478BE /* Data */,
 				5BB45E322B30753800E478BE /* views */,
+				5B5799CD2B30BD0C007C23D0 /* PropertyWrappers */,
 				5BB15E272B24DB7C001F908C /* MoureDevYouTubeTutorialApp.swift */,
 				5BB15E2B2B24DB7E001F908C /* Assets.xcassets */,
 				5BB15E2D2B24DB7E001F908C /* MoureDevYouTubeTutorial.entitlements */,
@@ -171,6 +179,10 @@
 				5BB45E362B3075FA00E478BE /* RowView.swift */,
 				5BB45E382B3078B100E478BE /* ListView.swift */,
 				5BB45E3A2B30A27400E478BE /* ListDetailView.swift */,
+				5B5799D42B31A7E0007C23D0 /* FaceIDView.swift */,
+				5B5799D62B31AD1E007C23D0 /* LinkWebView.swift */,
+				5B5799D82B31AECB007C23D0 /* WebKitView.swift */,
+				5B5799DC2B31B22A007C23D0 /* SafariWebView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -313,16 +325,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B5799D92B31AECB007C23D0 /* WebKitView.swift in Sources */,
 				5BB45E392B3078B100E478BE /* ListView.swift in Sources */,
 				5B5799D12B30BE73007C23D0 /* BindingView.swift in Sources */,
 				5BB45E2D2B30588B00E478BE /* ImageView.swift in Sources */,
 				5B5799CF2B30BD3F007C23D0 /* StateView.swift in Sources */,
 				5B5799D32B30C34C007C23D0 /* EnvironmentView.swift in Sources */,
+				5B5799D72B31AD1E007C23D0 /* LinkWebView.swift in Sources */,
+				5B5799D52B31A7E0007C23D0 /* FaceIDView.swift in Sources */,
 				5BB45E352B30759C00E478BE /* Programmer.swift in Sources */,
 				5BB45E372B3075FA00E478BE /* RowView.swift in Sources */,
 				5BB45E2F2B30654D00E478BE /* MapView.swift in Sources */,
 				5BB15E2A2B24DB7C001F908C /* StackView.swift in Sources */,
 				5BB45E3B2B30A27400E478BE /* ListDetailView.swift in Sources */,
+				5B5799DD2B31B22A007C23D0 /* SafariWebView.swift in Sources */,
 				5BB45E312B306CAB00E478BE /* CombinationView.swift in Sources */,
 				5BB15E282B24DB7C001F908C /* MoureDevYouTubeTutorialApp.swift in Sources */,
 			);
