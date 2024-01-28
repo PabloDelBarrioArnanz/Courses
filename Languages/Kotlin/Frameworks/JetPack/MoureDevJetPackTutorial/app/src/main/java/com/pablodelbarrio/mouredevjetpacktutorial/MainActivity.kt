@@ -25,7 +25,10 @@ class MainActivity : ComponentActivity() {
         setContent { // Activity block all in this block will be displayed
             MoureDevJetPackTutorialTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
                     Greeting("Android")
                 }
             }
@@ -38,10 +41,15 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     // If we don't use a components grouper all of them will be displayed in the same position
     Column( // Column it's similar to VStack
         // Properties for
-        modifier = Modifier.padding(16.dp).fillMaxWidth(),
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(painter = painterResource(R.drawable.avatar_icon), contentDescription = "Avatar photo")
+        Image(
+            painter = painterResource(R.drawable.avatar_icon),
+            contentDescription = "Avatar photo"
+        )
         Text(text = "Hello I'm $name!", modifier = modifier)
         Text(text = "I'm Software developer")
     }
