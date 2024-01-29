@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
 @Composable // Elements with Composable can be used in JetPack
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     // If we don't use a components grouper all of them will be displayed in the same position
-    Column( // Column it's similar to VStack
+    Column( // Column it's similar to VStack also exists Row witch it's similar to HStack
         // Properties for
         modifier = Modifier
             .padding(16.dp)
@@ -51,7 +51,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             contentDescription = "Avatar photo"
         )
         Text(text = "Hello I'm $name!", modifier = modifier)
-        Text(text = "I'm Software developer")
+        Text(text = "I'm Software Developer")
     }
 }
 
