@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.pablodelbarrio.mouredevjetpacktutorial.navigation.AppNavigation
 import com.pablodelbarrio.mouredevjetpacktutorial.ui.theme.MoureDevJetPackTutorialTheme
 
 class MainActivity : ComponentActivity() {
@@ -29,7 +30,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    // Greeting("Android")
+                    AppNavigation()
                 }
             }
         }
@@ -64,6 +66,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     MoureDevJetPackTutorialTheme {
-        Greeting("Pablo")
+        AppNavigation()
     }
 }
