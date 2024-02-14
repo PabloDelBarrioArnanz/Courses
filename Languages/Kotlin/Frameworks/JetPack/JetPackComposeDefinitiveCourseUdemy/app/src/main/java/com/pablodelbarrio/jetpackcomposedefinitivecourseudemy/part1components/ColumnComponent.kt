@@ -28,6 +28,7 @@ fun MyColumn() {
         The first one will fit the half of the space and the other two a quarter each
 
         verticalArrangement will distribute the elements in the component with the pattern choose
+        arrangements wouldn't work if we don't set the size
 
         If the component it's smaller than all children we can use scroll
     */
