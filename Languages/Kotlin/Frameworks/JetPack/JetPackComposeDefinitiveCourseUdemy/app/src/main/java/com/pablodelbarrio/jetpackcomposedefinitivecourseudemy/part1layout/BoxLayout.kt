@@ -1,4 +1,4 @@
-package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part1components
+package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part1layout
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -18,9 +18,9 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun MyBox() {
     /*
-        A box component with no size defined will use only the space needed
+        A box layout with no size defined will use only the space needed
         If we set a size smaller than content we can use scroll to see all content
-        The alignment property only applies for items inside that component not for children
+        The alignment property only applies for items inside that layout not for children
     */
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Box(
@@ -31,7 +31,7 @@ fun MyBox() {
                 .verticalScroll(rememberScrollState()),
             contentAlignment = Alignment.Center
         ) {
-            Text(text = "This is a box component")
+            Text(text = "This is a box layout")
         }
     }
 }

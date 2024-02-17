@@ -1,4 +1,4 @@
-package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part1components
+package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part1layout
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,19 +18,19 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun MyColumn() {
     /*
-        If we don't use components all item will be displayed in the same position
+        If we don't use layouts all item will be displayed in the same position
         Text(text = "Text 1")
         Text(text = "Text 2")
         Text(text = "Text 3")
 
-        Weight it's a way to split all the space of the component with a weighted value
-        For example if the component has 100px if we have 3 children with a weight of 2, 1, 1
+        Weight it's a way to split all the space of the layout with a weighted value
+        For example if the layout has 100px if we have 3 children with a weight of 2, 1, 1
         The first one will fit the half of the space and the other two a quarter each
 
-        verticalArrangement will distribute the elements in the component with the pattern choose
+        verticalArrangement will distribute the elements in the layout with the pattern choose
         arrangements wouldn't work if we don't set the size
 
-        If the component it's smaller than all children we can use scroll
+        If the layout it's smaller than all children we can use scroll
     */
     Column(
         modifier = Modifier

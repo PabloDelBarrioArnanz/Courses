@@ -1,4 +1,4 @@
-package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part1components
+package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part1layout
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun MyMixComponent() {
+fun MyMixLayout() {
     Column(Modifier.fillMaxSize()) {
         Row(
             Modifier
@@ -51,6 +51,6 @@ fun MyMixComponent() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun MixComponentPreview() {
-    MyMixComponent()
+fun MixLayoutPreview() {
+    MyMixLayout()
 }

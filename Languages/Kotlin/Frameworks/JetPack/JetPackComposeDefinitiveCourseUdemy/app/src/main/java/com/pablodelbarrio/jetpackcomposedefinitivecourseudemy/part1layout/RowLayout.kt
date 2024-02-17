@@ -1,4 +1,4 @@
-package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part1components
+package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part1layout
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
