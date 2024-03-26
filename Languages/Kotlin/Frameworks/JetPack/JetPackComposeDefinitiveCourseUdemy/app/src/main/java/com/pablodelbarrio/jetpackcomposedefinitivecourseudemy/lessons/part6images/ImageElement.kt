@@ -1,4 +1,4 @@
-package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part6images
+package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.lessons.part6images
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border

@@ -1,4 +1,4 @@
-package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part5buttons
+package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.lessons.part5buttons
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

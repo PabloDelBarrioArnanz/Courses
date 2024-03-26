@@ -1,4 +1,4 @@
-package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part2states
+package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.lessons.part2states
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

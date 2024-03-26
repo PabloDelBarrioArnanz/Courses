@@ -1,4 +1,4 @@
-package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part8slectionControl
+package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.lessons.part8slectionControl
 
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults

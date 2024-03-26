@@ -1,4 +1,4 @@
-package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part5buttons
+package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.lessons.part5buttons
 
 import android.util.Log
 import androidx.compose.foundation.BorderStroke

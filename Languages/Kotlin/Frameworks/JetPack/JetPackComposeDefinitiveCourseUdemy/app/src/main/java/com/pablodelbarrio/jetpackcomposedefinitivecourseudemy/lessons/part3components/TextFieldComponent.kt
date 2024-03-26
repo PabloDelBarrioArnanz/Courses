@@ -1,4 +1,4 @@
-package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part3components
+package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.lessons.part3components
 
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField

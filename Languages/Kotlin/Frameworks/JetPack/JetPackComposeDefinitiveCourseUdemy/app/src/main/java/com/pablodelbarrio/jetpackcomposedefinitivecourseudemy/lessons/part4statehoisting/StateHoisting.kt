@@ -1,4 +1,4 @@
-package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part4statehoisting
+package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.lessons.part4statehoisting
 
 
 import androidx.compose.material3.OutlinedTextField

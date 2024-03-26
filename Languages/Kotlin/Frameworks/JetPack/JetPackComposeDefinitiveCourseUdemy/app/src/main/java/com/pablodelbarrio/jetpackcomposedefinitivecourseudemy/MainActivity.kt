@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.exercises.instagramlogin.LoginScreen
 import com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.ui.theme.JetPackComposeDefinitiveCourseUdemyTheme
 
 class MainActivity : ComponentActivity() {
@@ -57,6 +58,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     JetPackComposeDefinitiveCourseUdemyTheme {
-        Greeting("Android")
+        LoginScreen()
     }
 }

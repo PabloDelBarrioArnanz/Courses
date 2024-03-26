@@ -1,4 +1,4 @@
-package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.part7progressbar
+package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.lessons.part7progressbar
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
