@@ -1,4 +1,4 @@
-package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.lessons.part18mvvm.login
+package com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.lessons.part18mvvm.login.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -47,14 +48,21 @@ import com.pablodelbarrio.jetpackcomposedefinitivecourseudemy.R
 
 @Composable
 fun LoginScreen(loginViewModel: LoginViewModel) {
+    val logging: Boolean by loginViewModel.logging.observeAsState(initial = false)
+
     Box(
         Modifier
             .fillMaxSize()
             .padding(horizontal = 20.dp)
     ) {
-        Header(Modifier.align(Alignment.TopEnd))
-        Body(Modifier.align(Alignment.Center), loginViewModel)
-        Footer(Modifier.align(Alignment.BottomCenter))
+        if (logging) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+
+        } else {
+            Header(Modifier.align(Alignment.TopEnd))
+            Body(Modifier.align(Alignment.Center), loginViewModel)
+            Footer(Modifier.align(Alignment.BottomCenter))
+        }
     }
 }
 
@@ -88,8 +96,8 @@ private fun Body(modifier: Modifier, loginViewModel: LoginViewModel) {
         ForgotPassword(Modifier.align(Alignment.End))
         Spacer(modifier = Modifier.size(24.dp))
         LoginButton(
+            loginViewModel,
             Modifier.align(Alignment.CenterHorizontally),
-            loginViewModel.checkValidLoginData()
         )
         Spacer(modifier = Modifier.size(24.dp))
         Or(Modifier.align(Alignment.CenterHorizontally))
@@ -167,11 +175,11 @@ private fun ForgotPassword(modifier: Modifier) {
 }
 
 @Composable
-private fun LoginButton(modifier: Modifier, enabled: Boolean) {
+private fun LoginButton(loginViewModel: LoginViewModel, modifier: Modifier) {
     Button(
         modifier = modifier.fillMaxWidth(),
-        onClick = { },
-        enabled = enabled,
+        onClick = { loginViewModel.onLoginClicked() },
+        enabled = loginViewModel.checkValidLoginData(),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFF4EA8E9),
             disabledContainerColor = Color(0xFF78C8F9),
