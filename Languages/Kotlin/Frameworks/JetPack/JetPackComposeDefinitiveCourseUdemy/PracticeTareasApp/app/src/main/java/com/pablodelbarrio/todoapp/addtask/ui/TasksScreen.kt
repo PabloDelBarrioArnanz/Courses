@@ -3,15 +3,19 @@ package com.pablodelbarrio.todoapp.addtask.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -29,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.pablodelbarrio.todoapp.addtask.ui.model.TaskModel
 
 
 @Composable
@@ -81,8 +86,9 @@ private fun AddTasksDialog(show: Boolean, onTaskAdd: (String) -> Unit, onDismiss
                     value = newTask,
                     onValueChange = { newTask = it })
                 Spacer(Modifier.size(16.dp))
-                Button(modifier = Modifier.fillMaxWidth(), onClick = {
+                Button(modifier = Modifier.fillMaxWidth(), enabled = newTask.isNotBlank(), onClick = {
                     onTaskAdd(newTask)
+                    newTask = ""
                 }) {
                     Text(text = "Save task")
                 }
@@ -93,7 +99,33 @@ private fun AddTasksDialog(show: Boolean, onTaskAdd: (String) -> Unit, onDismiss
 
 @Composable
 private fun TaskList(tasksViewModel: TasksViewModel) {
-    LazyColumn {
+    val tasks = tasksViewModel.tasks
 
+    LazyColumn {
+        items(tasks, key = { it.id }) { task ->
+            TaskComponent(task) {
+                tasksViewModel.onCheckTask(it)
+            }
+        }
+    }
+}
+
+@Composable
+private fun TaskComponent(task: TaskModel, onTaskComplete: (Long) -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+    ) {
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 4.dp), text = task.description
+            )
+            Checkbox(
+                checked = task.completed,
+                onCheckedChange = { onTaskComplete(task.id) })
+        }
     }
 }
