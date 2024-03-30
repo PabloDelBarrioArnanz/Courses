@@ -13,6 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".lessons.part18mvvm.InstagramApp"
         android:theme="@style/Theme.JetPackComposeDefinitiveCourseUdemy"
         tools:targetApi="31">
         <activity
