@@ -29,8 +29,14 @@ class TasksViewModel @Inject constructor() : ViewModel() {
         _tasks.add(TaskModel(description = newTask))
     }
 
-    fun onCheckTask(taskId: Long) {
+    fun onCheckTask(task: TaskModel) {
+        val index = _tasks.indexOfFirst { it.id == task.id }
+        _tasks[index] = _tasks[index].let { it.copy(completed = !it.completed) }
+    }
 
+    fun onItemRemove(task: TaskModel) {
+        val index = _tasks.indexOfFirst { it.id == task.id }
+        _tasks.removeAt(index)
     }
 
 }

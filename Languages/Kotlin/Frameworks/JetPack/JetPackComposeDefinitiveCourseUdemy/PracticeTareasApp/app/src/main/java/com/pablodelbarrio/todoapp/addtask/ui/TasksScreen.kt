@@ -1,6 +1,7 @@
 package com.pablodelbarrio.todoapp.addtask.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,7 +30,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -86,10 +90,13 @@ private fun AddTasksDialog(show: Boolean, onTaskAdd: (String) -> Unit, onDismiss
                     value = newTask,
                     onValueChange = { newTask = it })
                 Spacer(Modifier.size(16.dp))
-                Button(modifier = Modifier.fillMaxWidth(), enabled = newTask.isNotBlank(), onClick = {
-                    onTaskAdd(newTask)
-                    newTask = ""
-                }) {
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    enabled = newTask.isNotBlank(),
+                    onClick = {
+                        onTaskAdd(newTask)
+                        newTask = ""
+                    }) {
                     Text(text = "Save task")
                 }
             }
@@ -103,29 +110,41 @@ private fun TaskList(tasksViewModel: TasksViewModel) {
 
     LazyColumn {
         items(tasks, key = { it.id }) { task ->
-            TaskComponent(task) {
-                tasksViewModel.onCheckTask(it)
-            }
+            TaskComponent(
+                task,
+                { tasksViewModel.onCheckTask(it) },
+                { tasksViewModel.onItemRemove(it) })
         }
     }
 }
 
 @Composable
-private fun TaskComponent(task: TaskModel, onTaskComplete: (Long) -> Unit) {
+private fun TaskComponent(
+    task: TaskModel,
+    onTaskComplete: (TaskModel) -> Unit,
+    onItemRemove: (TaskModel) -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onLongPress = { onItemRemove(task) },
+                    onDoubleTap = { onTaskComplete(task) })
+            }
     ) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Text(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(horizontal = 4.dp), text = task.description
+                    .padding(horizontal = 4.dp),
+                style = if (task.completed) TextStyle(textDecoration = TextDecoration.LineThrough) else TextStyle(),
+                text = task.description
             )
             Checkbox(
                 checked = task.completed,
-                onCheckedChange = { onTaskComplete(task.id) })
+                onCheckedChange = { onTaskComplete(task) })
         }
     }
 }
