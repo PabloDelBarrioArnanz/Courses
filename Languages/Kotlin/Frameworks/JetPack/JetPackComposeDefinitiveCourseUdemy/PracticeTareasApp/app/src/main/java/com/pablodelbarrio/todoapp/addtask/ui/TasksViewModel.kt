@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pablodelbarrio.todoapp.addtask.domain.AddTaskUseCase
+import com.pablodelbarrio.todoapp.addtask.domain.DeleteTaskUseCase
 import com.pablodelbarrio.todoapp.addtask.domain.GetTasksUseCase
+import com.pablodelbarrio.todoapp.addtask.domain.UpdateStatusTaskUseCase
 import com.pablodelbarrio.todoapp.addtask.ui.TaskUIState.Error
 import com.pablodelbarrio.todoapp.addtask.ui.TaskUIState.Loading
 import com.pablodelbarrio.todoapp.addtask.ui.TaskUIState.Success
@@ -22,7 +24,9 @@ import javax.inject.Inject
 @HiltViewModel
 class TasksViewModel @Inject constructor(
     private val addTaskUseCase: AddTaskUseCase,
-    getTasksUseCase: GetTasksUseCase
+    getTasksUseCase: GetTasksUseCase,
+    private val updateStatusTaskUseCase: UpdateStatusTaskUseCase,
+    private val deleteTaskUseCase: DeleteTaskUseCase
 ) : ViewModel() {
 
     val uiState: StateFlow<TaskUIState> = getTasksUseCase().map(::Success)
@@ -58,11 +62,17 @@ class TasksViewModel @Inject constructor(
     fun onCheckTask(task: TaskModel) {
         // val index = _tasks.indexOfFirst { it.id == task.id }
         // _tasks[index] = _tasks[index].let { it.copy(completed = !it.completed) }
+        viewModelScope.launch {
+            updateStatusTaskUseCase(task.copy(completed = !task.completed))
+        }
     }
 
     fun onItemRemove(task: TaskModel) {
         // val index = _tasks.indexOfFirst { it.id == task.id }
         // _tasks.removeAt(index)
+        viewModelScope.launch {
+            deleteTaskUseCase(task)
+        }
     }
 
 }
