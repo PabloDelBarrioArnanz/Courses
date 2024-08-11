@@ -1,0 +1,221 @@
+<title>Monkey Type Clone - Test your typing skills</title>
+
+<style>
+  :root {
+    color-scheme: light dark;
+    --green: #00b755;
+    --yellow: #daaf38;
+    --red: #ca4754;
+    --black: #222;
+    --gray: #999;
+  }
+
+  body {
+    background: var(--black);
+    font-family: Menlo, monospace;
+    display: grid;
+    padding: 32px;
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  time {
+    color: var(--yellow);
+  }
+
+  section {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 600px;
+  }
+
+  input {
+    z-index: -999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  p {
+    display: felx;
+    flex-wrap: wrap;
+    gap: 3px 8px;
+    margin: 0;
+  }
+
+  x-letter {
+    color: var(--gray);
+    position: relative;
+
+    &.active::before {
+      content: '|';
+      color: var(--yellow);
+      font-size: 14px;
+      position: absolute;
+      left: -65%;
+      animation: 1s blink infinite ease-in-out;
+    }
+
+    &.active.is-last::before {
+      left: 65%;
+    }
+
+    &.correct {
+      color: var(--green);
+    }
+
+    &.incorrect {
+      color: var(--red);
+    }
+  }
+
+  x-word {
+    border-bottom: 1.5px solid transparent;
+    transition: border-color 0.3s ease-in-out;
+
+    &.marked {
+      border-color: var(--red);
+    }
+  }
+
+  @keyframes blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0;
+    }
+  }
+</style>
+
+<body>
+  <main>
+    <section id="game">
+      <time></time>
+      <p></p>
+      <input autofocus />
+    </section>
+  </main>
+</body>
+
+<script>
+  const INITIAL_TIME = 30
+
+  const TEXT =
+    'the quick brown fox jumps over the lazy dog and midudev is trying to close monkey type for fun and profit using vanilla js for the typing test speed'
+
+  const $time = document.querySelector('time')
+  const $paragraph = document.querySelector('p')
+  const $input = document.querySelector('input')
+
+  let words = []
+  let currentTime = INITIAL_TIME
+
+  initGame()
+  initEvents()
+
+  function initGame() {
+    words = TEXT.split(' ').splice(0, 32)
+    currentTime = INITIAL_TIME
+
+    $time.textContent = currentTime
+    $paragraph.innerHTML = words
+      .map((word) => {
+        const letters = word
+          .split('')
+          .map((letter) => `<x-letter>${letter}</x-letter>`)
+          .join('')
+
+        return `<x-word>
+            ${letters}
+            </x-word>
+             `
+      })
+      .join('')
+
+    const $firstWord = $paragraph.querySelector('x-word')
+    $firstWord.classList.add('active')
+    $firstWord.querySelector('x-letter').classList.add('active')
+
+    const intervalId = setInterval(() => {
+      --currentTime
+      $time.textContent = currentTime
+
+      if (currentTime === 0) {
+        clearInterval(intervalId)
+        gameOver()
+      }
+    }, 1000)
+  }
+
+  function initEvents() {
+    document.addEventListener('keydown', () => $input.focus())
+
+    $input.addEventListener('keydown', onKeyDown)
+    $input.addEventListener('keyup', onKeyUp)
+  }
+
+  function onKeyDown(event) {
+    const $currentWord = $paragraph.querySelector('x-word.active')
+    const $currentLetter = $currentWord.querySelector('x-letter.active')
+
+    const { key } = event
+    if (key === ' ') {
+      event.preventDefault()
+
+      const $nextWord = $currentWord.nextElementSibling
+      const $nextLetter = $nextWord.querySelector('x-letter')
+
+      $currentWord.classList.remove('active', 'marked')
+      $currentLetter.classList.remove('active')
+
+      $nextWord.classList.add('active')
+      $nextLetter.classList.add('active')
+
+      $input.value = ''
+
+      const hasMissingLetters =
+        $currentWord.querySelectorAll('x-letter:not(.correct)').length > 0
+
+      const classToAdd = hasMissingLetters ? 'marked' : 'correct'
+      $currentWord.classList.add(classToAdd)
+    }
+  }
+
+  function onKeyUp() {
+    const $currentWord = $paragraph.querySelector('x-word.active')
+    const $currentLetter = $currentWord.querySelector('x-letter.active')
+
+    const currentWord = $currentWord.textContent.trim()
+    $input.maxLength = currentWord.length
+
+    const $allLetters = $currentWord.querySelectorAll('x-letter')
+    $allLetters.forEach(($letter) =>
+      $letter.classList.remove('correct', 'incorrect')
+    )
+
+    $input.value.split('').forEach((char, index) => {
+      const $letter = $allLetters[index]
+      const letterToCheck = currentWord[index]
+
+      $letter.classList.add(char === letterToCheck ? 'correct' : 'incorrect')
+    })
+
+    $currentLetter.classList.remove('active', 'is-last')
+    const inputLength = $input.value.length
+    const $nextActiveLetter = $allLetters[inputLength]
+
+    if ($nextActiveLetter) {
+      $nextActiveLetter.classList.add('active')
+    } else {
+      $currentLetter.classList.add('active', 'is-last')
+    }
+  }
+
+  function gameOver() {}
+</script>
