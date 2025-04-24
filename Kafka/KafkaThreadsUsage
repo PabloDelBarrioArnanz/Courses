@@ -1,0 +1,57 @@
+KafkaThreadsUsage
+
+1. El @KafkaListener trabaja con un listener container
+Spring Kafka utiliza algo llamado ConcurrentMessageListenerContainer (cuando defines un @KafkaListener) para administrar los hilos y consumir mensajes.
+Este contenedor hace el poll al broker y distribuye los mensajes.
+
+2. ¿Cuántos hilos se usan?
+El número de hilos se controla principalmente con el parámetro concurrency en tu @KafkaListener. Por ejemplo:
+
+@KafkaListener(topics = ["mi-topico"], concurrency = "3")
+fun consumir(mensaje: String) {
+    println("Mensaje recibido: $mensaje")
+}
+
+WARNING
+Esto crea 3 hilos consumidores, cada uno con su propio KafkaConsumer. Estos hilos pueden leer en paralelo si hay suficientes particiones (mínimo 1 partición por hilo).
+
+3. ¿Qué pasa cuando se hace poll()?
+KafkaConsumer hace un poll() y puede recibir hasta N mensajes (controlado por la propiedad max.poll.records, por defecto 500).
+
+Esos mensajes se envían uno por uno al método del listener.
+
+No se crea un hilo nuevo por cada mensaje.
+Más bien, el hilo que hace el poll() también invoca tu listener, a menos que configures un TaskExecutor personalizado.
+
+Entonces, por defecto: un hilo procesa los mensajes de forma secuencial, aunque pueda leer varios a la vez.
+
+4. ¿Se pueden procesar los mensajes en paralelo?
+Sí, pero necesitas configurar explícitamente la concurrencia, o bien usar un thread pool personalizado.
+
+Dos formas comunes:
+    1. @KafkaListener(topics = ["mi-topico"], concurrency = "5")
+    2. Delegar a un pool dentro del listener:
+        @KafkaListener(topics = ["mi-topico"])
+        fun consumir(mensaje: String) {
+            threadPool.submit {
+                procesarMensaje(mensaje)
+            }
+        }
+
+
+Cuando se lee síncrono, los polls a Kafka se hacen cada max.poll.interval.ms (5min default) por lo que si tardamos en procesar la cantidad leída
+max max.poll.records (500 default) la siguiente lectura será después de esos 5 min y kafka no echará del grupo de consumidores
+
+Caso contrario, si usamos la pool dentro del listener puede pasar que lo desbordemos porque el hilo de kafka se libera muy rápido y volvería a hacer poll
+al pasarse el tiempo y quizá nuestra cola de la pool se desborde.
+
+- Esto se puede arreglar:
+    1. Programación reactiva o rate limiter para por usar backpressure
+    2. Usar una pool configurada para que si se llena, usa el hilo caller para ejecutar la tarea, evitando que lo siga llenando
+    val executor = ThreadPoolExecutor(
+        10, // core pool size
+        20, // max pool size
+        60, TimeUnit.SECONDS,
+        LinkedBlockingQueue(1000), // cola con tamaño limitado
+        ThreadPoolExecutor.CallerRunsPolicy() // estrategia si la cola se llena
+    )
