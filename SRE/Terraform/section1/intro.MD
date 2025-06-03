@@ -38,7 +38,7 @@ El código se organiza en bloques, cada bloque tiene
 
 - Tipo de bloque - indica que es lo que se quiere crear
 - Tipo de recurso - indica donde aplica en este caso nuestra máquina
-- Nombre del recurso - nombre identificativo en nuestro código
+- Nombre del recurso - nombre identificativo en nuestro código (debe ser único por tipo de recurso)
 - Argumentos - parámetros que se le pasan al recurso en función del tipo de bloque
 
 registry.terraform.io guía para todos los recursos y providers disponibles en terraform
