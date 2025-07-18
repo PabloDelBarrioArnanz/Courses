@@ -47,5 +47,3 @@ resource "local_file" "multiple-products" {
   content  = "Multiple Products list"
   filename = "${path.module}/multiple-products-${random_string.multiple-suffix[count.index].id}.txt"
 }
-
-// terraform show muestra el estado actual de los recursos
