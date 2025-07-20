@@ -70,11 +70,27 @@ If whe use another letter like console.log(y) will fail cause y is not in the me
   }
 ```
 This will print the function completely due functions are allocated in the memory as is
-Hosting in JS doesn't work with let and cost cause this variables also are moved to the memory part of the context, but are not preassigned to undefined,
+Hosting in JS doesn't work with let and cost cause this variable also is moved to the memory part of the context, but is not preassigned to undefined,
 This part of the memory is called 'Temporal Dead Zone' and if we try to access them before they are declared will throw an error
 ```
   console.log(x)
   
   let x = 7;
 ```
-This will throw an error 'Cannot access 'x' before initialization'
+This will throw an error 'Cannot access 'x' before initialization
+
+But what happens with arrow functions?
+```
+  sayHello()
+
+  var sayHello = () => { // No matters if you use function or not = function() {..}
+    console.log("Hello")
+  }
+```
+In this case, will return this error 'sayHello is not a function.' That's because on memory phase just the variable allocation is donde and sayHello
+is a variable that only will be allocated with an undefined value
+Then just log the value of sayHello, no invocating it works and return undefined
+
+In browser, if we set a breakpoint, the Call Stack has the GEC and inside the scope we can found the memory
+
+## How functions works & Variable environment
