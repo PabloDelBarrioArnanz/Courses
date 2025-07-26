@@ -190,3 +190,24 @@ Memory allocation will be done for variable a in the GS will exist an entry a: u
 Will fails, no allocation memory done for x
 Undefined it's a special key-value during the variable it's not assigned (can be all time-code) like a placeholder
 Also we can assign undefined to a variable to remove his value, but it's a really bad practice
+
+## The Scope Chain
+
+```JS
+  function a() {
+    var c = 10;
+    c();
+    console.log(b); // 10
+
+    function c() {
+      console.log(b); // 10
+      console.log(c); // 10
+    }
+  }
+
+  var b = 10;
+  a();
+  console.log(c); // fails ReferenceError
+```
+
+Every variable has a scope, and this scope is the place where the variable is defined.
