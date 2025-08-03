@@ -210,4 +210,23 @@ Also we can assign undefined to a variable to remove his value, but it's a reall
   console.log(c); // fails ReferenceError
 ```
 
-Every variable has a scope, and this scope is the place where the variable is defined.
+Every variable has a scope, and this scope is the place where the variable is defined. And this affects how it's the variable resolved.
+The variable it's search in the current scope and if not found the scope it's being up until the global scope is reached.
+There are three types of scopes:
+
+- **Global Scope**: Variables defined outside of any function or block.
+- **Function Scope**: Variables defined within a function are only accessible within that function.
+- **Block Scope**: Variables defined within a block (like inside an `if` statement
+
+## let & const | Temporal Dead Zone
+
+```JS
+  console.log(a); // works but undefined
+  console.log(b); // fails due ReferenceError
+  var a = 10;
+  let b = 100;
+```
+
+Before execute any line of previous script, by the memory allocation phase, both variables are allocated with undefined value, but var it's in the global memory space and let in in the script memory space.
+And the script memory space it's not accessible until a value it's put on them. On execution phase where 10 it's set to a, then it's accessible.
+This time where let variable it's hoisted but not initialized is called the **Temporal Dead Zone** (TDZ).
