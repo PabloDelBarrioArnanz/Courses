@@ -3,7 +3,7 @@ function sum(a, b) {
   return a + b
 }
 
-// Se puede exportar la función directamente al definirla
+// Se puede exportar directamente al definir la función
 export function subtract(a, b) {
   return a - b
 }
