@@ -5,7 +5,9 @@ const fs = require('node:fs/promises'); // Este ';' si es necesario porque si no
 
 // No hace falta IIFE (Immediately Invoked Function Expression), pero queda mejor
 
-// En este caso se ejecuta asíncrono pero el resultado es síncrono porque no continua la siguiente línea hasta que no termina la lectura del archivo
+// En este caso se ejecuta asíncrono pero el resultado es síncrono
+// porque no continua la siguiente línea hasta que no termina la lectura del archivo
+// Aunque los recursos están liberados no como el síncrono real
 (async () => {
   console.log('Leyendo el primer archivo...\n')
   const content = await fs.readFile('./stuff/file.txt', 'utf-8')
