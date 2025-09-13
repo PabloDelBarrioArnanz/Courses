@@ -2,7 +2,8 @@
 // Los módulos nativos son aquellos que vienen integrados con Node.js
 // Y como Node.JS es un entorno de ejecución cuenta con muchos módulos para trabajar con el sistema operativo, archivos, rutas, internet, etc
 
-// const os = require('os') Desde Node 18 se recomienda usar el prefijo node
+// Módulo OS (Operating System) - Proporciona información sobre el sistema operativo
+// const os = require('os') Desde Node 16 se recomienda usar el prefijo node
 const os = require('node:os') 
 
 console.log('Nombre del sistema operativo:', os.platform())

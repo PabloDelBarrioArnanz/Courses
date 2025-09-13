@@ -6,7 +6,7 @@
 
 // ES Modules es la forma moderna de trabajar con módulos en JavaScript
 // Lo que se exporta default se importa sin llaves
-import multiply, { sum, subtract } from './sum.mjs'
+import multiply, { sum, subtract } from './sum.mjs' // Requerido usar la extensión del fichero en react y otros frameworks no lo vemos porque lo vite/webpack se encarga 
 
 console.log(sum(2, 3))
 console.log(subtract(5, 2))
