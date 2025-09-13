@@ -1,0 +1,21 @@
+{
+  "name": "curso-node",
+  "version": "1.0.0",
+  "description": "Curso de node de MiduDev",
+  "license": "ISC",
+  "author": "Pablo",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "picocolors": "1.1.1"
+  },
+   "devDependencies": {
+    "standard": "17.1.2"
+  },
+  "eslintConfig": {
+    "extends": "standard"
+  }
+}
