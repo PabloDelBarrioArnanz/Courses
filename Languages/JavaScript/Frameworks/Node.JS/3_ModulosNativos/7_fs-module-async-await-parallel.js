@@ -8,3 +8,5 @@ Promise.all([
   console.log(content, '\n')
   console.log(bigContent, '\n')
 })
+
+console.log('Haciendo otras cosas mientras se leen los archivos...\n')
