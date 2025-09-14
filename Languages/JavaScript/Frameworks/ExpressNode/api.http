@@ -1,0 +1,16 @@
+
+### Get main
+GET http://localhost:3000
+
+
+### Get Image
+GET http://localhost:3000/image
+
+### Post something
+POST http://localhost:3000/myPost
+Content-Type: application/json
+
+{
+  "name": "Pablo",
+  "age": 28
+}
