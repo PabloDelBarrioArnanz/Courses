@@ -1,12 +1,15 @@
 
 ### Get main
+# @no-log
 GET http://localhost:3000
 
 
 ### Get Image
+# @no-log
 GET http://localhost:3000/image
 
 ### Post something
+# @no-log
 POST http://localhost:3000/myPost
 Content-Type: application/json
 

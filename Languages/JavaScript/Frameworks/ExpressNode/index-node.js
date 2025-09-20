@@ -1,4 +1,3 @@
-
 const http = require('node:http')
 const fs = require('node:fs')
 
@@ -30,7 +29,7 @@ const server = http.createServer((request, response) => {
     request.on('data', chunk => {
       body += chunk.toString()
     })
-    
+
     // La función de leer los datos es asíncrona entonces para cuando termine nos suscribimos al evento
     request.on('end', () => {
       response.statusCode = 200
@@ -47,6 +46,6 @@ server.listen(desiredPort, () => {
   console.log(`Server listening on port http://localhost:${server.address().port}`)
 })
 
-// Nada mas acceder a la url desde un navegador automáticamente se hacen 2 request 1 a / y otra a /favicon.ico
+// Nada más acceder a la url desde un navegador automáticamente se hacen 2 request 1 a / y otra a /favicon.ico
 // Desde un curl u otras herramientas no harían la segunda request /favicon.ico
 // Para que programa se reinicie con cada cambio podemos arrancar al app con el modo watch: node --watch index.js
