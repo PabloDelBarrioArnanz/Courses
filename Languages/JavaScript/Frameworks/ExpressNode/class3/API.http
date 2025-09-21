@@ -1,0 +1,42 @@
+
+
+### Get movies
+# @no-log
+GET http://localhost:3000/movies
+
+### Get movie by id
+# @no-log
+GET http://localhost:3000/movie/7d2832f8-c70a-410e-8963-4c93bf36cc9c
+
+### Get movies by genre
+# @no-log
+GET http://localhost:3000/movies?genre=Action
+
+### Post movie
+# @no-log
+POST http://localhost:3000/movie
+Content-Type: application/json
+
+{
+  "title": "Weapons",
+  "year": 2025,
+  "director": "Ni idea",
+  "duration": 152,
+  "poster": "https://i.ebayimg.com/images/g/yokAAOSw8w1YARbm/s-l1200.jpg",
+  "genre": [
+    "Action",
+    "Crime",
+    "Drama"
+  ]
+}
+
+### Patch movie
+# @no-log
+PATCH http://localhost:3000/movie/7d2832f8-c70a-410e-8963-4c93bf36cc9c
+Content-Type: application/json
+
+{
+  "title": "Weapons",
+  "year": 2025,
+  "director": "Ni idea"
+}
