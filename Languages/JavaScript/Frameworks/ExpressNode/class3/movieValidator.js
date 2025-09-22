@@ -1,4 +1,4 @@
-const zod = require('zod')
+import zod from 'zod'
 
 const schema = zod.object({
   title: zod.string({
@@ -13,8 +13,8 @@ const schema = zod.object({
   poster: zod.url('Title poster must be a valid url')
 })
 
-function validateMovie(body) {
-  const { title, genre, year, director, duration, rate, poster, } = body
+export function validateMovie(body) {
+  const { title, genre, year, director, duration, rate, poster } = body
   const movie = {
     title: title,
     genre: genre,
@@ -30,8 +30,6 @@ function validateMovie(body) {
   return schema.safeParseAsync(movie)
 }
 
-function validatePartialMovie(body) {
+export function validatePartialMovie(body) {
   return schema.partial().safeParseAsync(body) // partial hace todas las propiedades opcionales para validar solo lo que se quiere actualizar
 }
-
-module.exports = { validateMovie, validatePartialMovie }
