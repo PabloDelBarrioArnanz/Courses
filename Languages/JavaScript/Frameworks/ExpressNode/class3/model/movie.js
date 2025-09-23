@@ -1,9 +1,9 @@
-import movies from '../movies.json'
+import movies from '../movies.json' with { type: 'json' }
 import { randomUUID } from 'node:crypto'
 
 export class MovieModel {
 
-  async static getAll ({ genre }) {
+  static async getAll ({ genre }) {
     if (genre) {
       return movies.filter(movie =>
         movie.genre.some(movieGenre => movieGenre.toLowerCase() === genre.toLowerCase())
@@ -11,11 +11,11 @@ export class MovieModel {
     } else return movies
   }
 
-  async static getById (id) {
+  static async getById (id) {
     return movies.find(movie => movie.id === id)
   }
 
-  async static create (movie) {
+  static async create (movie) {
     const newMovie = {
       id: randomUUID(),
       ...movie
@@ -23,7 +23,7 @@ export class MovieModel {
     movies.push(newMovie)
   }
 
-  async static update (id, movie) {
+  static async update (id, movie) {
     const movieIndex = movies.findIndex(movie => movie.id === id)
     if (movieIndex !== -1) {
       const updatedMovie = {

@@ -1,5 +1,5 @@
 import { MovieModel } from '../model/movie.js'
-import { validateMovie, validatePartialMovie } from '../movieValidator.js'
+import { validateMovie, validatePartialMovie } from '../schemas/movieValidator.js'
 
 export class MoviesController {
 
