@@ -1,25 +1,41 @@
-import { Slot } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Stack, Link } from "expo-router";
+import { View, Pressable } from "react-native";
+import { Logo, CircleInfoIcon } from "../components/Icons";
+
+import "../global.css";
 
 export default function Layout() {
   return (
-    <SafeAreaProvider>
-      <View style={styles.container}>
-        <StatusBar style="light" />
-        <Slot />
-      </View>
-    </SafeAreaProvider>
+    <View className="flex-1">
+      <Stack
+        screenOptions={{
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
+          headerTitle: "",
+          headerLeft: headerLeft,
+          headerRight: headerRight,
+        }}
+      />
+    </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#000",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 12,
-  },
-});
+const headerLeft = () => {
+  return (
+    <Link asChild href="/">
+      <Pressable>
+        <Logo />
+      </Pressable>
+    </Link>
+  );
+};
+
+const headerRight = () => {
+  return (
+    <Link asChild href="/about">
+      <Pressable>
+        <CircleInfoIcon />
+      </Pressable>
+    </Link>
+  );
+};

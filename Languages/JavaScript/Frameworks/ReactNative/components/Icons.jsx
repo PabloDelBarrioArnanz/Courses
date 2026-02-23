@@ -3,12 +3,12 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Svg, { Path } from "react-native-svg";
 
 export const CircleInfoIcon = (props) => {
-  return <FontAwesome6 name="circle-info" size={24} color="white" {...props} />
-}
+  return <FontAwesome6 name="circle-info" size={24} color="white" {...props} />;
+};
 
 export const HomeIcon = (props) => {
-  return <FontAwesome name="home" size={24} color="white" {...props} />
-}
+  return <FontAwesome name="home" size={24} color="white" {...props} />;
+};
 
 export const Logo = (props) => (
   <Svg xmlns="http://www.w3.org/2000/svg" width={176} height={40} {...props}>

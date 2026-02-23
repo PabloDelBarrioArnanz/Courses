@@ -1,25 +1,31 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
-import { Animated, Image, StyleSheet, Text, View } from "react-native";
+import { Animated, Image, StyleSheet, Text, View, Pressable } from "react-native";
 import { Score } from "./Score";
+
+import { Link } from "expo-router";
 
 export function GameCard({ game }) {
   return (
-    <View
-      key={game.slug}
-      className="flex-row bg-slate-500/10 p-4 rounded-xl gap-4 mb-10"
-    >
-      <Image source={{ uri: game.image }} style={styles.image} />
-      <View>
-        <Text className="mb-1" style={styles.title}>
-          {game.title}
-        </Text>
-        <Score score={game.score} maxScore={100} />
-        <Text style={styles.description} className="mt-2 flex-shrink-0">
-          {game.description} - {game.releaseDate}
-        </Text>
-      </View>
-    </View>
+    <Link asChild href={`/${game.slug}`}>
+      <Pressable className="active:opacity-70 border border-black active:border-white/50 mb-2 bg-slate-500/10 rounded-xl p-4">
+        <View
+          key={game.slug}
+          className="flex-row gap-4"
+        >
+          <Image source={{ uri: game.image }} style={styles.image} />
+          <View className="flex-shrink">
+            <Text className="mb-1" style={styles.title}>
+              {game.title}
+            </Text>
+            <Score score={game.score} maxScore={100} />
+            <Text style={styles.description} className="mt-2 flex-shrink-0">
+              {game.description} - {game.releaseDate}
+            </Text>
+          </View>
+        </View>
+      </Pressable>
+    </Link>
   );
 }
 

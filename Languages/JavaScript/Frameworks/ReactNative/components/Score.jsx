@@ -10,7 +10,9 @@ export function Score({ score, maxScore = 100 }) {
   };
 
   return (
-    <View className={`${getColors()} w-8 h-8 rounded-full justify-center items-center`}>
+    <View
+      className={`${getColors()} w-8 h-8 rounded-full justify-center items-center`}
+    >
       <Text className="text-lg font-bold">{score}</Text>
     </View>
   );
