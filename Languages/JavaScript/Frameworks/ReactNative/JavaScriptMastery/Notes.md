@@ -10,3 +10,27 @@ Una vez tenemos tailwind funcionando dentro del fichero tailwind.config.js podem
 ## Routing & Navigation
 
 La carpeta app representa el router y el nombre del fichero es la url a esa ruta
+El orden de rederización es
+
+- \_layout.tsx: Donde se define la estructura de la pagina y aspectos globales
+
+- \index.tsx: Componente donde podemos crear items para renderizar
+
+- \movies\[id].tsx: Cualquier fichero ya se dinámico o no se puede enlazar desde nuestros componentes
+
+Por ejemplo si estamos en el index:
+
+```js
+  import { Link } from "react-router";
+
+  <Link href="/onboarding">Onboarding</Link>
+  <Link href="/movie/avengers">Avengers Movie</Link>
+```
+
+Luego en el componente de detalles [id].tsx podemos recuperar el id con:
+
+```js
+import { useLocalSearchParams } from "expo-router";
+
+const { id } = useLocalSearchParams();
+```
