@@ -40,4 +40,26 @@ Algo importante sobre las rutas es que si creamos un carpeta con el nombre entre
 app/route/home.tsx -> route/home
 app/(route)/home.tsx -> route/home
 
---> Pendiente explicar RootLayout -> Screen/s -> Tab/s -> tab
+--> RootLayout -> Stack -> Screen -> Tab/s -> tab
+
+Podemos entender la navegabilidad como un árbol jerárquico:
+
+- Los stacks son marcos de trabajo que ocupan toda la pantalla, el atributo name tiene que matcher con una carpeta o fichero
+
+```js
+<Stack>
+  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+  <Stack.Screen name="movies/[id]" options={{ headerShown: false }} />
+</Stack>
+```
+
+- Dentro de esos stacks podemos tener tabs que son penstañas agrupadas por un menú inferior, los nombres también tiene que cuadrar con ficheros
+
+```js
+<Tabs>
+  <Tabs.Screen name="index" />
+  <Tabs.Screen name="search" />
+</Tabs>
+```
+
+En este ejemplo la pantalla de detalle no tendrá la barra inferior porque no esta dentro de las Tabs.
