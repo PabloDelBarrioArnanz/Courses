@@ -63,3 +63,15 @@ Podemos entender la navegabilidad como un árbol jerárquico:
 ```
 
 En este ejemplo la pantalla de detalle no tendrá la barra inferior porque no esta dentro de las Tabs.
+
+Otra forma de navegar es de una manera programática manipulando el router a nuestra voluntad. Se suele instanciar en el componente padre y se pasan sus métodos como parámetros a los hijos.
+
+```js
+import { useRouter } from "expo-router";
+
+const router = useRouter();
+```
+
+## HomeScreen UI
+
+En el fichero app.json se hace referencia a los logos de la app
