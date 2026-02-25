@@ -34,3 +34,10 @@ import { useLocalSearchParams } from "expo-router";
 
 const { id } = useLocalSearchParams();
 ```
+
+Algo importante sobre las rutas es que si creamos un carpeta con el nombre entre paréntesis se excluirá de la ruta, se usa para agrupar pantallas pero sin complicar la ruta
+
+app/route/home.tsx -> route/home
+app/(route)/home.tsx -> route/home
+
+--> Pendiente explicar RootLayout -> Screen/s -> Tab/s -> tab
