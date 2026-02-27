@@ -1,5 +1,5 @@
 import { Link } from "expo-router";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity } from "react-native";
 
 const MovieCard = ({
   id,
@@ -9,22 +9,23 @@ const MovieCard = ({
   release_date,
 }: Movie) => {
   return (
-    <View>
-      <Link href={`/movie/${id}`} aschild>
-        <TouchableOpacity className="w-[30%]">
-          <Image
-            source={{
-              uri: poster_path
-                ? `https://image.tmdb.org/t/p/w500${poster_path}`
-                : "https://placehold.co/600x400/1a1a1a/ffffff.png",
-            }}
-            className="w-full h-52 rounded-lg"
-            resizeMode="cover"
-          />
-          <Text className="text-sm font-bold text-white">{title}</Text>
-        </TouchableOpacity>
-      </Link>
-    </View>
+    <Link href={`/movie/${id}`} asChild>
+      <TouchableOpacity className="w-[30%]">
+        <Image
+          source={{
+            uri: poster_path
+              ? `https://image.tmdb.org/t/p/w500${poster_path}`
+              : "https://placehold.co/600x400/1a1a1a/FFFFFF.png",
+          }}
+          className="w-full h-52 rounded-lg"
+          resizeMode="cover"
+        />
+
+        <Text className="text-sm font-bold text-white mt-2" numberOfLines={1}>
+          {title}
+        </Text>
+      </TouchableOpacity>
+    </Link>
   );
 };
 
